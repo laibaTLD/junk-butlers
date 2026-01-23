@@ -131,30 +131,10 @@ export default function ServicesSection({
             </div>
           </div>
 
-          {/* Sticky image + content blocks */}
+          {/* Content blocks */}
           <div className="mb-16 lg:mb-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-              <div className="lg:sticky lg:top-24">
-                <div className="relative overflow-hidden rounded-3xl border border-gray-100 shadow-2xl">
-                  <Image
-                    src={
-                      images.find((img) => img.slotName === "services-image-1")?.imageUrl ||
-                      images[0]?.imageUrl ||
-                      "https://images.pexels.com/photos/6195895/pexels-photo-6195895.jpeg"
-                    }
-                    alt={
-                      images.find((img) => img.slotName === "services-image-1")?.altText ||
-                      "Residential and commercial junk removal"
-                    }
-                    width={1200}
-                    height={900}
-                    className="w-full h-[360px] sm:h-[420px] lg:h-[520px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
-                </div>
-              </div>
-
-              <div className="space-y-6">
+            <div className="grid grid-cols-1">
+              <div className="space-y-6 max-w-3xl mx-auto">
                 {/* Only show the main two blocks on the right */}
                 {contentSections
                   .filter((s) => s.heading && s.paragraphs.length > 0)

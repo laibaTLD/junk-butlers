@@ -22,12 +22,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create a test account for development
-    // In production, use real SMTP credentials
-    const testAccount = process.env.NODE_ENV === 'development' 
-      ? await nodemailer.createTestAccount()
-      : null;
-
     // Create transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.hostinger.com',

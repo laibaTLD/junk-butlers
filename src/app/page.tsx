@@ -10,8 +10,6 @@ import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
 import FAQSection from "@/sections/FAQSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import ServiceHighlightsSection from "@/sections/ServiceHighlightsSection";
-import FooterSection from "@/sections/FooterSection";
-import CTASection from "@/sections/CTASection";
 import { LandingPageData } from "@/types/template";
 import CompanyDetails from "@/sections/CompanyDetails";
 import { fetchLandingPageForSSG } from "@/lib/database";
@@ -216,14 +214,6 @@ export default async function Home() {
             />
           )}
 
-          {landingPageData.content.ctaSection && (
-            <CTASection
-              data={landingPageData.content.ctaSection}
-              theme={landingPageData.themeData}
-              images={landingPageData.images}
-            />
-          )}
-
           {landingPageData.content.gallery && (
             <GallerySection
               title={landingPageData.content.gallery.title}
@@ -246,7 +236,6 @@ export default async function Home() {
                 }
               }
               businessData={landingPageData.businessData}
-              theme={landingPageData.themeData}
             />
           )}
 
@@ -267,21 +256,7 @@ export default async function Home() {
               />
             )}
 
-          <FooterSection
-            businessName={landingPageData.businessName}
-            businessDescription={
-              landingPageData.content?.about?.description ||
-              "Professional services you can trust. We're here to help with all your business needs."
-            }
-            logoImage={
-              landingPageData.images?.find(
-                (img) => img.slotName === "logo-image"
-              )?.imageUrl
-            }
-            businessData={landingPageData.businessData}
-            themeData={landingPageData.themeData}
-            copyright={landingPageData.content.footer?.copyright}
-          />
+          {/* Footer is rendered in the root layout */}
         </main>
       </div>
     </Layout>

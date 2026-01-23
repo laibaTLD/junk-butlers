@@ -1,12 +1,10 @@
 "use client";
 
 import Map from "@/components/Map";
-import {
-  useScrollAnimation,
-  useStaggeredAnimation,
-} from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useState, FormEvent, ChangeEvent } from "react";
 import { FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface FormData {
   firstName: string;
@@ -70,32 +68,16 @@ interface BusinessOverviewSectionProps {
     };
     hours?: BusinessHours;
   };
-  theme?: {
-    primaryColor: string;
-    secondaryColor: string;
-    accentColor?: string;
-  };
+  // Theme is now provided via context
 }
 
 export default function BusinessOverviewSection({
-  content,
   contact,
   businessData,
-  theme,
 }: BusinessOverviewSectionProps) {
-  const { ref: contentRef, visibleItems: contentVisible } =
-    useStaggeredAnimation(content.length, 200);
-  const { ref: mapRef, isVisible: mapVisible } =
-    useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
-  const { ref: formRef, isVisible: formVisible } =
-    useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
-  const { ref: contactRef, isVisible: contactVisible } =
-    useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
-
-  // Theme colors with fallbacks
-  const primaryColor = theme?.primaryColor || 'var(--color-primary)';
-  const secondaryColor = theme?.secondaryColor || 'var(--color-secondary)';
-  const accentColor = theme?.accentColor || primaryColor;
+  const { primaryColor, secondaryColor, accentColor } = useTheme();
+  const { ref: mapRef } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
+  const { ref: formRef } = useScrollAnimation<HTMLDivElement>({ threshold: 0.2 });
 
   // Form state
   const [formData, setFormData] = useState<FormData>({
@@ -113,8 +95,6 @@ export default function BusinessOverviewSection({
     error: null
   });
   
-  // Interactive state
-  const [activeContentIndex, setActiveContentIndex] = useState(0);
   
   // Handle form input changes
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -233,17 +213,13 @@ export default function BusinessOverviewSection({
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Left side - Content Display + Contact Form */}
-            <div ref={contentRef} className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-8">
               
 
               {/* Contact Form - Moved to Left Side */}
               <div
                 ref={formRef}
-                className={`relative bg-white/15 backdrop-blur-xl rounded-3xl p-8 border border-white/20 transition-all duration-1000 hover:bg-white/20 hover:shadow-2xl ${
-                  formVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
+                className="relative bg-white/15 backdrop-blur-xl rounded-3xl p-8 border border-white/20 transition-all duration-1000 hover:bg-white/20 hover:shadow-2xl opacity-100"
                 style={{
                   boxShadow: `0 20px 40px ${primaryColor}15`
                 }}
@@ -404,7 +380,7 @@ export default function BusinessOverviewSection({
                   {formState.isSuccess && (
                     <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-start space-x-2">
                       <FiCheckCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                      <p>Your message has been sent successfully! We'll get back to you soon.</p>
+                      <p>Your message has been sent successfully! We&apos;ll get back to you soon.</p>
                     </div>
                   )}
 
@@ -455,11 +431,7 @@ export default function BusinessOverviewSection({
             {contact?.showMap && businessData?.coordinates && (
               <div
                 ref={mapRef}
-                    className={`relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-1000 hover:bg-white/15 hover:shadow-2xl ${
-                  mapVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
+                className="relative bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20 transition-all duration-1000 hover:bg-white/15 hover:shadow-2xl opacity-100"
                     style={{
                       boxShadow: `0 15px 35px ${primaryColor}15`
                     }}
@@ -486,12 +458,7 @@ export default function BusinessOverviewSection({
                 {/* Enhanced Business Contact Info */}
             {businessData && (
               <div
-                ref={contactRef}
-                    className={`relative rounded-3xl p-8 transition-all duration-1000 hover:shadow-2xl ${
-                  contactVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
+                className="relative rounded-3xl p-8 transition-all duration-1000 hover:shadow-2xl opacity-100"
                 style={{
                       background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,
                       boxShadow: `0 20px 40px ${primaryColor}20`

@@ -1,6 +1,5 @@
-{ 
+{
   "compilerOptions": {
-    "types": ["node", "geojson"],
     "target": "ES2017",
     "lib": [
       "dom",

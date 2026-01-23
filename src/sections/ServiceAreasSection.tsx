@@ -348,7 +348,7 @@ export default function ServiceAreasSection({
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="tel:6232562272"
+                  href="/contact-us"
                   className="group relative inline-flex items-center px-8 py-4 text-label-lg font-bold text-white rounded-2xl shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-1 overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,

@@ -350,7 +350,7 @@ export default function FAQSection({
                 </a>
                 
                 <a
-                  href="tel:6232562272"
+                  href="/contact-us"
                   className="group relative inline-flex items-center px-8 py-4 text-label-lg font-bold rounded-2xl border-2 transition-all duration-500 hover:scale-105 hover:-translate-y-1"
                   style={{
                     color: primaryColor,

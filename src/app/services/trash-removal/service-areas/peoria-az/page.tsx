@@ -211,9 +211,7 @@ async function getLandingPageData(): Promise<LandingPageData> {
 }
 
 export default async function TrashRemovalPeoriaPage() {
-  const landingPageData = await getLandingPageData();
-  const servicesContent = landingPageData.content?.services;
-  const servicesImages = landingPageData.images?.filter((img: { slotName: string }) => img.slotName.includes("services")) || [];
+  const landingPageData = await getLandingPageData();  const servicesImages = landingPageData.images?.filter((img: { slotName: string }) => img.slotName.includes("services")) || [];
 
   return (
     <ServiceAreaLayout

@@ -2,7 +2,6 @@ import ServiceAreaLayout from "@/components/ServiceAreaLayout";
 import ServiceAreaHeroSection from "@/sections/ServiceAreaHeroSection";
 import ServiceAreaIntroSection from "@/sections/ServiceAreaIntroSection";
 import ServiceAreaDetailSection from "@/sections/serviceAreaDetailSection";
-import ServiceAreaBulletsSection from "@/sections/ServiceAreaBulletsSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import ServicesSection from "@/sections/ServicesSection";
 import CTASection from "@/sections/CTASection";
@@ -68,22 +67,6 @@ export default async function TrashRemovalSurprisePage() {
   const areaIntroParagraphs = [
     "Finding a reliable partner to clear your clutter shouldn't be a hassle. As the premier professional local trash removal company in Surprise, AZ, Junk Butlers is dedicated to reclaiming your space with efficiency and integrity. Whether you are dealing with a cluttered basement or need a skilled professional all home and offices junk removal contractor in Surprise, AZ, our team delivers results that exceed expectations. We take pride in being a trusted and premier home debris removal hauling contractor in Surprise, AZ, specialized in everything from construction cleanup to garage junk removal contractor Surprise, AZ services. If you have old electronics or heavy machinery, our certified appliance trash removal service Surprise, AZ ensures eco-friendly disposal.",
     "We understand that budget and timing are critical, which is why we are recognized as a local and affordable furniture appliance disposal contractor Surprise, AZ, offering transparent pricing without hidden fees. As an experienced and trusted all kind trash junk removal demolition contractor company in Surprise, AZ, we handle the heavy lifting, loading, and hauling so you don't have to. From residential renovations to massive commercial cleanouts, our same-day junk removal options provide the immediate relief you need. Choose the experts who prioritize your satisfaction and the local environment—contact Junk Butlers today for a cleaner, junk-free tomorrow.",
-  ];
-
-  const whyChooseUsParagraphs = [
-    "Junk Butlers - Your Trusted Premier No1 Trash Removal Company Surprise AZ",
-    "Experience the gold standard with Junk Butlers, your professional and trusted same-day trash removal contractor in Surprise, AZ. We provide skilled home debris removal and affordable furniture disposal, ensuring a clean, junk-free space with our certified hauling expertise.",
-    "Certified or Trusted Local No1 Eco Friendly Trash Removal Contractor Surprise AZ",
-    "In today's environmentally conscious world, choosing a certified or trusted local #1 eco-friendly trash removal contractor in Surprise, AZ, is about community responsibility. We implement sustainable disposal practices, prioritizing recycling, donations, and compliant disposal.",
-  ];
-
-  const whyChooseUsBullets = [
-    "Surprise Experts — Local, trusted, licensed and insured",
-    "Fast Response — Same-day and next-day availability",
-    "Eco-Friendly — Recycling, donation, and compliant disposal",
-    "Transparent Pricing — No hidden fees",
-    "Professional Team — Certified, courteous specialists",
-    "Comprehensive Services — Residential and commercial solutions",
   ];
 
   

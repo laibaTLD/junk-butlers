@@ -35,7 +35,6 @@ export const revalidate = 60;
 const SERVICE_DATA = {
   title: "Certified & Professional #1 Junks and Trash Hauling Services Contractor Scottsdale, AZ",
   areaLabel: "Scottsdale, AZ",
-  subheading: "Your Trusted Junk Removal Experts in Scottsdale",
   description:
     "Clear the clutter with Junk Butlers, your local and trusted choice for professional and affordable junk removal. From skilled furniture disposal to same-day office cleanouts, our certified team provides residential and commercial hauling you can count on.",
   bullets: [
@@ -246,7 +245,6 @@ async function getLandingPageData(): Promise<LandingPageData> {
 
 export default async function JunkRemovalPhoenixPage() {
   const landingPageData = await getLandingPageData();
-  const servicesContent = landingPageData.content?.services;
   const servicesImages = landingPageData.images?.filter((img) => img.slotName.includes("services")) || [];
 
   return (
@@ -262,7 +260,6 @@ export default async function JunkRemovalPhoenixPage() {
         serviceName={SERVICE_DATA.title}
         areaLabel={SERVICE_DATA.areaLabel}
         heading={SERVICE_DATA.title}
-        subheading={SERVICE_DATA.subheading}
         description={SERVICE_DATA.description}
         images={landingPageData.images || []}
         theme={landingPageData.themeData}

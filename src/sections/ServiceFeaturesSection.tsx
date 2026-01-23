@@ -1,9 +1,6 @@
 ﻿"use client";
 
-import {
-  useScrollAnimation,
-  useStaggeredAnimation,
-} from "@/hooks/useScrollAnimation";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import { ThemeData } from "@/types/template";
 
 type FeatureItem = string | { title: string; description?: string };
@@ -36,7 +33,7 @@ export default function ServiceFeaturesSection({
   );
 
   const primaryColor = theme?.primaryColor || "#14532d";
-  const secondaryColor = theme?.secondaryColor || "#134e4a";
+  const secondaryColor = theme?.secondaryColor || "#6b7280";
   const cardShadow = `${primaryColor}22`;
 
   return (
@@ -80,9 +77,8 @@ export default function ServiceFeaturesSection({
 
           <div ref={featuresRef} className="space-y-4">
             {features.map((feature, i) => {
-              const isObject = typeof feature === "object" && feature !== null;
-              const titleText = isObject ? (feature as any).title : (feature as string);
-              const descText = isObject ? (feature as any).description : undefined;
+              const titleText = typeof feature === 'object' ? feature.title : feature;
+              const descText = typeof feature === 'object' ? feature.description : undefined;
 
               return (
                 <div

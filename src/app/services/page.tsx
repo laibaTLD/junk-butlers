@@ -1,6 +1,3 @@
-import Layout from "@/components/Layout";
-import Navbar from "@/components/Navbar";
-import FooterSection from "@/sections/FooterSection";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -67,24 +64,8 @@ export default async function ServicesIndexPage() {
   ].filter((i) => i.service);
 
   return (
-    <Layout
-      title={landingPageData.seoData.title}
-      description={landingPageData.seoData.description}
-      theme={landingPageData.themeData}
-      seoData={landingPageData.seoData}
-      landingPageData={landingPageData}
-    >
-      <div className="animate-fade-in-up">
-        <Navbar
-          businessName={landingPageData.businessName}
-          logoImage={
-            landingPageData.images?.find((img) => img.slotName === "logo-image")
-              ?.imageUrl
-          }
-          themeData={landingPageData.themeData}
-          phoneNumber={landingPageData.businessData?.phone}
-        />
-        <main className="bg-white">
+    <div className="animate-fade-in-up">
+      <main className="bg-white">
           <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Our Services
@@ -115,23 +96,7 @@ export default async function ServicesIndexPage() {
               ))}
             </div>
           </section>
-          <FooterSection
-            businessName={landingPageData.businessName}
-            businessDescription={
-              landingPageData.content?.about?.description ||
-              "Professional services you can trust. We're here to help with all your business needs."
-            }
-            logoImage={
-              landingPageData.images?.find(
-                (img) => img.slotName === "logo-image"
-              )?.imageUrl
-            }
-            businessData={landingPageData.businessData}
-            themeData={landingPageData.themeData}
-            copyright={landingPageData.content.footer?.copyright}
-          />
-        </main>
-      </div>
-    </Layout>
+      </main>
+    </div>
   );
 }

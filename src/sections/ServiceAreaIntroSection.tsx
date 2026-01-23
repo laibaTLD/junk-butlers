@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ThemeData } from "@/types/template";
 
 interface ServiceAreaIntroSectionProps {

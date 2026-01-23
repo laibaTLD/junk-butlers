@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import Navbar from "@/components/Navbar";
-import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
 import ServiceAreaHeroSection from "@/sections/ServiceAreaHeroSection";
@@ -61,29 +60,28 @@ export default async function ServingAreasPage() {
         />
         <main className="bg-white">
           <ServiceAreaHeroSection
-            serviceName="All Services"
-            areaLabel="Our Service Areas"
+            serviceName="Junk Removal"
+            areaLabel="Service Areas"
             heading={
-              landingPageData.seoData.title
-                ? `${landingPageData.seoData.title} – Service Areas`
-                : "Service Areas We Cover"
-            }
-            subheading="Explore the cities and regions where we provide professional iron work and structural services."
-            description="We proudly serve multiple neighborhoods and regions, delivering reliable craftsmanship and on-time installation wherever your project is located."
+                `Junk Removal Service Areas`            }
+            subheading="Fast, reliable, and eco-friendly junk removal services in your neighborhood."
+            description="We make junk removal easy with our professional team, transparent pricing, and commitment to environmentally responsible disposal. Whether it's residential cleanouts, construction debris, or commercial waste, we handle it all with care and efficiency."
+            images={landingPageData.images || []}
             theme={landingPageData.themeData}
           />
 
           <ServiceAreaIntroSection
-            title="Local Service, Professional Results"
+            title="Comprehensive Junk Removal Services"
             paragraphs={[
-              "Every service area we cover receives the same level of care, precision, and attention to detail. Our team handles on-site measurement, fabrication, and installation so your project is completed smoothly from start to finish.",
-              "Whether you need new structures, custom metal work, or repairs to existing installations, we bring our workshop-quality results directly to your property.",
+              "Serving homes and businesses across the region, we provide comprehensive junk removal solutions tailored to your needs. Our experienced team handles everything from single-item pickups to full property cleanouts with efficiency and care.",
+              "We're committed to responsible disposal practices, ensuring that your unwanted items are recycled, donated, or disposed of in an environmentally friendly way whenever possible.",
             ]}
             bullets={[
-              "On-site visits and measurements in your area",
-              "Custom solutions for homes, shops, and commercial buildings",
-              "Skilled fabrication, welding, and professional finishing",
-              "Reliable timelines and clear communication from start to finish",
+              "Same-day and next-day service available in most areas",
+              "No hidden fees - upfront pricing before we start",
+              "Fully licensed, insured, and background-checked team",
+              "Eco-friendly disposal with 60%+ recycling rate",
+              "Residential, commercial, and construction cleanouts"
             ]}
             theme={landingPageData.themeData}
           />
@@ -102,21 +100,6 @@ export default async function ServingAreasPage() {
               theme={landingPageData.themeData}
             />
           )}
-          <FooterSection
-            businessName={landingPageData.businessName}
-            businessDescription={
-              landingPageData.content?.about?.description ||
-              "Professional services you can trust. We're here to help with all your business needs."
-            }
-            logoImage={
-              landingPageData.images?.find(
-                (img) => img.slotName === "logo-image"
-              )?.imageUrl
-            }
-            businessData={landingPageData.businessData}
-            themeData={landingPageData.themeData}
-            copyright={landingPageData.content.footer?.copyright}
-          />
         </main>
       </div>
     </Layout>

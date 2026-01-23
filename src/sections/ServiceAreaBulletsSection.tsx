@@ -5,6 +5,10 @@ import { ThemeData } from "@/types/template";
 
 type BulletItem = string | { title: string; description?: string };
 
+function isBulletObject(item: BulletItem): item is { title: string; description?: string } {
+  return typeof item === 'object' && item !== null && 'title' in item;
+}
+
 interface ServiceAreaBulletsSectionProps {
   bullets: BulletItem[];
   theme?: ThemeData;
@@ -31,9 +35,8 @@ const ServiceAreaBulletsSection: React.FC<ServiceAreaBulletsSectionProps> = ({
                 style={{ borderColor: `${primaryColor}1f` }}
               >
                 {(() => {
-                  const isObject = typeof b === "object" && b !== null;
-                  const titleText = isObject ? (b as any).title : (b as string);
-                  const descText = isObject ? (b as any).description : undefined;
+                  const titleText = isBulletObject(b) ? b.title : b;
+                  const descText = isBulletObject(b) ? b.description : undefined;
                   return (
                     <>
                       <div className="flex items-start gap-3">

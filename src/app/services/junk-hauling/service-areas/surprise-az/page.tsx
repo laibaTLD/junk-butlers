@@ -31,20 +31,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// Types
-type ServiceData = {
-  title: string;
-  areaLabel: string;
-  subheading: string;
-  description: string;
-  bullets: Array<{ title: string; description: string }>;
-};
-
 // Data variables
-const SERVICE_DATA: ServiceData = {
+const SERVICE_DATA = {
   title: "Certified & Professional #1 Junks and Trash Hauling Services Contractor Surprise, AZ",
   areaLabel: "Surprise, AZ",
-  subheading: "Your Trusted Junk Removal Experts in Surprise, AZ",
   description:
     "Need it gone now? Junk Butlers offers skilled home debris, furniture, and trash removal services. As a certified home and office hauling contractor, we provide affordable clean-outs and demolition tailored to your needs. Fast, local, and highly rated!",
   bullets: [
@@ -252,9 +242,7 @@ async function getLandingPageData(): Promise<LandingPageData> {
 }
 
 export default async function JunkRemovalPhoenixPage() {
-  const landingPageData = await getLandingPageData();
-  const servicesContent = landingPageData.content?.services;
-  const servicesImages = landingPageData.images?.filter((img) => img.slotName.includes("services")) || [];
+  const landingPageData = await getLandingPageData();  const servicesImages = landingPageData.images?.filter((img) => img.slotName.includes("services")) || [];
 
   return (
     <ServiceAreaLayout
@@ -269,7 +257,6 @@ export default async function JunkRemovalPhoenixPage() {
         serviceName={SERVICE_DATA.title}
         areaLabel={SERVICE_DATA.areaLabel}
         heading={SERVICE_DATA.title}
-        subheading={SERVICE_DATA.subheading}
         description={SERVICE_DATA.description}
         images={landingPageData.images || []}
         theme={landingPageData.themeData}

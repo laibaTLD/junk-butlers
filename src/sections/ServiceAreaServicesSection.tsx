@@ -2,7 +2,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Image as ImageType } from "@/types/template";
 import Image from "next/image";
-import { useState } from "react";
 
 interface ServiceItem {
   heading: string;
@@ -34,8 +33,7 @@ export default function ServiceAreaServicesSection({
     useScrollAnimation<HTMLParagraphElement>({ threshold: 0.2 });
 
   // Theme colors with fallbacks
-  const primaryColor = theme?.primaryColor || 'var(--color-primary)';
-  const secondaryColor = theme?.secondaryColor || 'var(--color-secondary)';
+  const primaryColor = theme?.primaryColor || "#14532d";
 
   // Get the first image for the left side
   const mainImage = images[0]?.imageUrl || "/images/image-1.webp";
