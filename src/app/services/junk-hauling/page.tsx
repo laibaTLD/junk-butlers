@@ -10,17 +10,17 @@ import Breadcrumbs from "@/app/services/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Professional Junk Hauling Services | Fast & Reliable Hauling Solutions',
-  description: 'Expert junk hauling services for homes and businesses. Fast, reliable, and affordable junk hauling with proper disposal and recycling.',
+  title: 'Professional Junk Hauling Services | Fast & Reliable Trash Hauling',
+  description: 'Expert Junk Hauling services for homes and businesses. Fast, reliable, and affordable trash hauling with proper disposal and recycling solutions.',
   openGraph: {
-    title: 'Professional Junk Hauling Services | Fast & Reliable Hauling Solutions',
-    description: 'Expert junk hauling services for homes and businesses. Fast, reliable, and affordable junk hauling with proper disposal and recycling.',
+    title: 'Professional Junk Hauling Services | Fast & Reliable Trash Hauling',
+    description: 'Expert Junk Hauling services for homes and businesses. Fast, reliable, and affordable trash hauling with proper disposal and recycling solutions.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Professional Junk Hauling Services | Fast & Reliable Hauling Solutions',
-    description: 'Expert junk hauling services for homes and businesses. Fast, reliable, and affordable junk hauling.',
+    title: 'Professional Junk Hauling Services | Fast & Reliable Trash Hauling',
+    description: 'Expert Junk Hauling services for homes and businesses. Fast, reliable, and affordable trash hauling.',
   },
 };
 
@@ -49,7 +49,7 @@ async function getLandingPageData(): Promise<LandingPageData> {
   return landingPageData;
 }
 
-export default async function JunkHaulingPage() {
+export default async function TrashRemovalPage() {
   const landingPageData = await getLandingPageData();
 
   // Use hardcoded service areas for Arizona cities
@@ -57,32 +57,32 @@ export default async function JunkHaulingPage() {
     {
       city: "Peoria",
       region: "AZ",
-      description: "Fast and reliable junk hauling services for Peoria residents and businesses"
+      description: "Fast and reliable Junk Hauling services for Peoria residents and businesses"
     },
     {
       city: "Phoenix", 
       region: "AZ",
-      description: "Professional junk hauling and transport services throughout Phoenix"
+      description: "Professional Junk Hauling and hauling services throughout Phoenix"
     },
     {
       city: "Glendale",
       region: "AZ", 
-      description: "Efficient junk hauling solutions for Glendale properties"
+      description: "Efficient Junk Hauling solutions for Glendale properties"
     },
     {
       city: "Sun City",
       region: "AZ",
-      description: "Specialized junk hauling services for Sun City senior community"
+      description: "Specialized Junk Hauling services for Sun City senior community"
     },
     {
       city: "Surprise",
       region: "AZ",
-      description: "Comprehensive junk hauling services for Surprise area"
+      description: "Comprehensive Junk Hauling services for Surprise area"
     },
     {
       city: "Scottsdale",
       region: "AZ",
-      description: "Premium junk hauling services for Scottsdale properties"
+      description: "Premium Junk Hauling services for Scottsdale properties"
     }
   ];
 
@@ -117,21 +117,21 @@ export default async function JunkHaulingPage() {
                 Professional Junk Hauling Services
               </h1>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our comprehensive junk hauling services handle everything from single-item pickups to full-scale debris removal. 
-                We provide fast, reliable, and professional hauling solutions for residential and commercial properties 
+                Our comprehensive Junk Hauling services handle everything from regular household trash pickup to large-scale debris removal. 
+                We provide fast, reliable, and professional trash hauling solutions for residential and commercial properties 
                 across Peoria, Phoenix, Glendale, Sun City, Surprise, and Scottsdale.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">What We Haul</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Junk Hauling Services</h3>
                   <ul className="space-y-2 text-gray-600">
-                    <li>• Furniture and appliances</li>
-                    <li>• Construction debris</li>
-                    <li>• Yard waste and landscaping</li>
-                    <li>• Electronics and e-waste</li>
-                    <li>• Household junk and clutter</li>
-                    <li>• Commercial waste and equipment</li>
+                    <li>• Regular trash pickup</li>
+                    <li>• Bulk Junk Hauling</li>
+                    <li>• Construction debris removal</li>
+                    <li>• Yard waste removal</li>
+                    <li>• Commercial trash services</li>
+                    <li>• Recycling services</li>
                   </ul>
                 </div>
                 <div className="bg-gray-50 p-6 rounded-lg">
@@ -147,20 +147,20 @@ export default async function JunkHaulingPage() {
                 </div>
               </div>
 
-              <div className="bg-orange-50 border border-orange-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-orange-900 mb-4">Why Choose Our Junk Hauling?</h3>
+              <div className="bg-red-50 border border-red-200 p-6 rounded-lg mb-12">
+                <h3 className="text-xl font-semibold text-red-900 mb-4">Why Choose Our Junk Hauling?</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Fast Service</h4>
-                    <p className="text-orange-700 text-sm">Quick pickup and hauling when you need it</p>
+                    <h4 className="font-semibold text-red-800 mb-2">Fast Service</h4>
+                    <p className="text-red-700 text-sm">Quick pickup and removal when you need it</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Proper Disposal</h4>
-                    <p className="text-orange-700 text-sm">Responsible disposal and recycling practices</p>
+                    <h4 className="font-semibold text-red-800 mb-2">Proper Disposal</h4>
+                    <p className="text-red-700 text-sm">Responsible trash disposal and recycling</p>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Heavy Equipment</h4>
-                    <p className="text-orange-700 text-sm">Right tools for any hauling job</p>
+                    <h4 className="font-semibold text-red-800 mb-2">Reliable Schedule</h4>
+                    <p className="text-red-700 text-sm">Consistent and dependable Junk Hauling</p>
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default async function JunkHaulingPage() {
             businessName={landingPageData.businessName}
             businessDescription={
               landingPageData.content?.about?.description ||
-              "Professional junk hauling services you can trust. We're here to help with all your hauling needs."
+              "Professional Junk Hauling services you can trust. We're here to help with all your trash hauling needs."
             }
             logoImage={
               landingPageData.images?.find(

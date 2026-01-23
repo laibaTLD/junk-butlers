@@ -35,7 +35,7 @@ export default function ServiceOverlayCardSection({
           {/* Left side: Heading and Description */}
           <div className="order-2 lg:order-1">
             <h2
-              className="text-2xl md:text-4xl xl:text-5xl font-bold leading-tight mb-6"
+              className="text-1xl md:text-3xl xl:text-4xl font-bold leading-tight mb-6"
               style={{ color: primaryColor }}
             >
               {heading}
@@ -48,8 +48,9 @@ export default function ServiceOverlayCardSection({
           </div>
 
           {/* Right side: Images */}
-          <div className="order-1 lg:order-2 space-y-82 flex flex-col justify-center">
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+          <div className="h-full flex flex-col gap-10
+           justify-center">
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl flex-1">
               <NextImage
                 src={backgroundImage.src}
                 alt={backgroundImage.alt}
@@ -59,7 +60,7 @@ export default function ServiceOverlayCardSection({
               />
             </div>
             {secondImage && (
-              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl flex-1">
                 <NextImage
                   src={secondImage.src}
                   alt={secondImage.alt}

@@ -5,7 +5,29 @@ import {
   useScrollAnimation,
   useStaggeredAnimation,
 } from "@/hooks/useScrollAnimation";
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
+import { FiCheckCircle, FiAlertCircle, FiLoader } from "react-icons/fi";
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  message?: string;
+}
+
+interface FormState {
+  isSubmitting: boolean;
+  isSuccess: boolean;
+  error: string | null;
+}
 
 interface Schedule {
   day: string;
@@ -75,8 +97,129 @@ export default function BusinessOverviewSection({
   const secondaryColor = theme?.secondaryColor || 'var(--color-secondary)';
   const accentColor = theme?.accentColor || primaryColor;
 
+  // Form state
+  const [formData, setFormData] = useState<FormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [formState, setFormState] = useState<FormState>({
+    isSubmitting: false,
+    isSuccess: false,
+    error: null
+  });
+  
   // Interactive state
   const [activeContentIndex, setActiveContentIndex] = useState(0);
+  
+  // Handle form input changes
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error for the field being edited
+    if (formErrors[name as keyof FormErrors]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+  
+  // Validate form
+  const validateForm = (): boolean => {
+    const errors: FormErrors = {};
+    
+    if (!formData.firstName.trim()) {
+      errors.firstName = 'First name is required';
+    }
+    
+    if (!formData.lastName.trim()) {
+      errors.lastName = 'Last name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.message.trim()) {
+      errors.message = 'Message is required';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+  
+  // Handle form submission
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setFormState({
+      isSubmitting: true,
+      isSuccess: false,
+      error: null
+    });
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+      
+      // Reset form on success
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      
+      setFormState({
+        isSubmitting: false,
+        isSuccess: true,
+        error: null
+      });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setFormState(prev => ({
+          ...prev,
+          isSuccess: false
+        }));
+      }, 5000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormState({
+        isSubmitting: false,
+        isSuccess: false,
+        error: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+      });
+    }
+  };
 
   return (
     <section
@@ -86,141 +229,12 @@ export default function BusinessOverviewSection({
 
       <div className="relative z-10 min-h-screen">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          {/* Interactive Content Navigation */}
-          <div className="mb-12">
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {content.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveContentIndex(index)}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                    activeContentIndex === index
-                      ? 'scale-105 shadow-lg'
-                      : 'hover:scale-105'
-                  }`}
-                  style={{
-                    background: activeContentIndex === index
-                      ? `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
-                      : 'rgba(255, 255, 255, 0.1)',
-                    color: activeContentIndex === index ? '#ffffff' : primaryColor,
-                    boxShadow: activeContentIndex === index
-                      ? `0 8px 25px ${primaryColor}30`
-                      : '0 4px 15px rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  {item.heading}
-                </button>
-              ))}
-            </div>
-          </div>
+         
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Left side - Content Display + Contact Form */}
             <div ref={contentRef} className="lg:col-span-2 space-y-8">
-              {/* Main Content Card */}
-              <div
-                className={`group relative transition-all duration-1000 ${
-                  contentVisible.includes(activeContentIndex)
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-12"
-                }`}
-                style={{ animationDelay: `${activeContentIndex * 0.2}s` }}
-              >
-                <div 
-                  className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/20 hover:bg-white/15 transition-all duration-500 transform hover:-translate-y-2 hover:scale-[1.02]"
-                  style={{
-                    boxShadow: `0 20px 40px ${primaryColor}15, 0 0 0 1px ${primaryColor}20`
-                  }}
-                >
-                  {/* Content Header */}
-                  <div className="mb-8">
-                    <div className="flex items-center space-x-4 mb-6">
-                      <div 
-                        className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
-                        style={{
-                          background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,
-                          boxShadow: `0 8px 25px ${primaryColor}30`
-                        }}
-                      >
-                        <span className="text-white font-bold text-lg">{activeContentIndex + 1}</span>
-                      </div>
-                      <h2 
-                        className="text-heading-xl lg:text-heading-xl font-bold transition-colors duration-300"
-                        style={{ 
-                          color: primaryColor,
-                          textShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
-                        }}
-                      >
-                        {content[activeContentIndex]?.heading}
-                  </h2>
-                    </div>
-
-                    <p 
-                      className="text-description-lg lg:text-description-xl leading-relaxed transition-colors duration-300"
-                      style={{ 
-                        color: secondaryColor,
-                        textShadow: '0 1px 5px rgba(0, 0, 0, 0.1)'
-                      }}
-                    >
-                      {content[activeContentIndex]?.description}
-                    </p>
-                  </div>
-
-                  {/* CTA Button */}
-                  {content[activeContentIndex]?.ctaButton && (
-                    <div className="pt-4">
-                      <a
-                        href={content[activeContentIndex].ctaButton.href}
-                        className="group relative inline-flex items-center px-8 py-4 text-label-lg font-bold text-white rounded-2xl shadow-2xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-1 overflow-hidden"
-                        style={{
-                          background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,
-                          boxShadow: `0 15px 35px ${primaryColor}30`
-                        }}
-                      >
-                        <span className="relative z-10 flex items-center">
-                          {content[activeContentIndex].ctaButton.label}
-                          <svg 
-                            className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                      </span>
-                        <div 
-                          className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                          style={{ background: 'rgba(255, 255, 255, 0.2)' }}
-                        ></div>
-                      </a>
-                    </div>
-                  )}
-
-                  {/* Decorative Elements */}
-                  <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full animate-pulse"
-                       style={{ background: primaryColor, animationDelay: `${activeContentIndex * 0.5}s` }}></div>
-                  <div className="absolute -bottom-3 -left-3 w-4 h-4 rounded-full animate-pulse"
-                       style={{ background: secondaryColor, animationDelay: `${activeContentIndex * 0.7}s` }}></div>
-                </div>
-
-                {/* Content Progress Indicator */}
-                <div className="mt-8 flex justify-center">
-                  <div className="flex space-x-2">
-                    {content.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          index === activeContentIndex ? 'scale-125' : 'scale-100'
-                        }`}
-                        style={{
-                          background: index === activeContentIndex ? primaryColor : secondaryColor + '40',
-                          boxShadow: index === activeContentIndex ? `0 0 10px ${primaryColor}40` : 'none'
-                        }}
-                      ></div>
-                    ))}
-                  </div>
-                </div>
-          </div>
+              
 
               {/* Contact Form - Moved to Left Side */}
               <div
@@ -249,7 +263,7 @@ export default function BusinessOverviewSection({
                   </p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -257,15 +271,25 @@ export default function BusinessOverviewSection({
                         className="block text-label-sm font-semibold mb-2"
                         style={{ color: primaryColor }}
                       >
-                        First Name
+                        First Name {formErrors.firstName && <span className="text-red-500">*</span>}
                       </label>
                       <input
                         type="text"
                         id="firstName"
                         name="firstName"
-                        className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition-colors"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        className={`w-full px-4 py-3 bg-white border ${
+                          formErrors.firstName ? 'border-red-500' : 'border-neutral-300'
+                        } rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 transition-colors ${
+                          formErrors.firstName ? 'focus:ring-red-200' : 'focus:ring-neutral-200 focus:border-neutral-400'
+                        }`}
                         placeholder="John"
+                        disabled={formState.isSubmitting}
                       />
+                      {formErrors.firstName && (
+                        <p className="mt-1 text-sm text-red-500">{formErrors.firstName}</p>
+                      )}
                     </div>
                     <div>
                       <label
@@ -273,15 +297,25 @@ export default function BusinessOverviewSection({
                         className="block text-label-sm font-semibold mb-2"
                         style={{ color: primaryColor }}
                       >
-                        Last Name
+                        Last Name {formErrors.lastName && <span className="text-red-500">*</span>}
                       </label>
                       <input
                         type="text"
                         id="lastName"
                         name="lastName"
-                        className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition-colors"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        className={`w-full px-4 py-3 bg-white border ${
+                          formErrors.lastName ? 'border-red-500' : 'border-neutral-300'
+                        } rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 transition-colors ${
+                          formErrors.lastName ? 'focus:ring-red-200' : 'focus:ring-neutral-200 focus:border-neutral-400'
+                        }`}
                         placeholder="Doe"
+                        disabled={formState.isSubmitting}
                       />
+                      {formErrors.lastName && (
+                        <p className="mt-1 text-sm text-red-500">{formErrors.lastName}</p>
+                      )}
                     </div>
                   </div>
 
@@ -291,15 +325,25 @@ export default function BusinessOverviewSection({
                       className="block text-label-sm font-semibold mb-2"
                       style={{ color: primaryColor }}
                     >
-                      Email
+                      Email {formErrors.email && <span className="text-red-500">*</span>}
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition-colors"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 bg-white border ${
+                        formErrors.email ? 'border-red-500' : 'border-neutral-300'
+                      } rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 transition-colors ${
+                        formErrors.email ? 'focus:ring-red-200' : 'focus:ring-neutral-200 focus:border-neutral-400'
+                      }`}
                       placeholder="john@example.com"
+                      disabled={formState.isSubmitting}
                     />
+                    {formErrors.email && (
+                      <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
+                    )}
                   </div>
 
                   <div>
@@ -314,8 +358,11 @@ export default function BusinessOverviewSection({
                       type="tel"
                       id="phone"
                       name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition-colors"
                       placeholder="(555) 123-4567"
+                      disabled={formState.isSubmitting}
                     />
                   </div>
 
@@ -325,38 +372,75 @@ export default function BusinessOverviewSection({
                       className="block text-label-sm font-semibold mb-2"
                       style={{ color: primaryColor }}
                     >
-                      Message
+                      Message {formErrors.message && <span className="text-red-500">*</span>}
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={4}
-                      className="w-full px-4 py-3 bg-white border border-neutral-300 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition-colors resize-none"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 bg-white border ${
+                        formErrors.message ? 'border-red-500' : 'border-neutral-300'
+                      } rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:outline-none focus:ring-2 resize-none transition-colors ${
+                        formErrors.message ? 'focus:ring-red-200' : 'focus:ring-neutral-200 focus:border-neutral-400'
+                      }`}
                       placeholder="Tell us about your project..."
+                      disabled={formState.isSubmitting}
                     ></textarea>
+                    {formErrors.message && (
+                      <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>
+                    )}
                   </div>
+
+                  {/* Form status messages */}
+                  {formState.error && (
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 flex items-start space-x-2">
+                      <FiAlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <p>{formState.error}</p>
+                    </div>
+                  )}
+                  
+                  {formState.isSuccess && (
+                    <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 flex items-start space-x-2">
+                      <FiCheckCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                      <p>Your message has been sent successfully! We'll get back to you soon.</p>
+                    </div>
+                  )}
 
                   <button
                     type="submit"
-                    className="w-full px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 group relative overflow-hidden"
+                    className="w-full px-8 py-4 rounded-xl font-bold text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                     style={{
-                      background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,
+                      background: formState.isSubmitting 
+                        ? `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
+                        : `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`,
                       boxShadow: `0 10px 25px ${primaryColor}30`
                     }}
+                    disabled={formState.isSubmitting}
                   >
-                    <span className="relative z-10 flex items-center justify-center">
-                      Send Message
-                      <svg
-                        className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                      </svg>
-                    </span>
+                    {formState.isSubmitting ? (
+                      <span className="flex items-center justify-center">
+                        <FiLoader className="animate-spin w-5 h-5 mr-2" />
+                        Sending...
+                      </span>
+                    ) : (
+                      <span className="relative z-10 flex items-center justify-center">
+                        Send Message
+                        <svg
+                          className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </span>
+                    )}
                     <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                      className={`absolute inset-0 opacity-0 ${
+                        !formState.isSubmitting && 'group-hover:opacity-20'
+                      } transition-opacity duration-300`}
                       style={{ background: 'rgba(255, 255, 255, 0.2)' }}
                     ></div>
                   </button>

@@ -76,6 +76,24 @@ const ServiceAreaIntroSection: React.FC<ServiceAreaIntroSectionProps> = ({
               </p>
             ))}
           </div>
+          
+          {/* Bullet Points */}
+          {bullets && bullets.length > 0 && (
+            <div className="mt-10 max-w-3xl mx-auto">
+              <ul className="space-y-4">
+                {bullets.map((bullet, index) => (
+                  <li 
+                    key={index}
+                    className="flex items-start"
+                    style={{ color: secondaryColor }}
+                  >
+                    <span className="mr-3 mt-1 flex-shrink-0" style={{ color: primaryColor }}>•</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Bottom Accent Line */}

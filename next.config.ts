@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Optimize for SSG + ISR (no output: 'export' to keep ISR functionality)
+  output: 'export',
+  // Optimize for SSG + ISR
   images: {
     remotePatterns: [
       {

@@ -1,298 +1,345 @@
+
 import ServiceAreaLayout from "@/components/ServiceAreaLayout";
 import ServiceAreaHeroSection from "@/sections/ServiceAreaHeroSection";
 import ServiceAreaIntroSection from "@/sections/ServiceAreaIntroSection";
 import ServiceAreaDetailSection from "@/sections/serviceAreaDetailSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
-import ServicesSection from "@/sections/ServicesSection";
+import ServiceAreaServicesSection from "@/sections/ServiceAreaServicesSection";
 import CTASection from "@/sections/CTASection";
 import ServiceOverlayCardSection from "@/sections/ServiceOverlayCardSection";
 import FAQSection from "@/sections/FAQSection";
-import WhyChooseUsSection from "@/sections/WhyChooseUsSection";
-import ServiceFeaturesSection from "@/sections/ServiceFeaturesSection";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
-import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+// Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junks Removal Contractor Sun City AZ',
-  description: 'Reclaim your space with Junk Butlers, your local and trusted residential or commercial junks removal and demolition contractor in Sun City, AZ. Professional and affordable same day trash removal.',
+  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
+  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
   openGraph: {
-    title: 'Certified & Professional #1 Junks Removal Contractor Sun City AZ',
-    description: 'Reclaim your space with Junk Butlers, your local and trusted residential or commercial junks removal and demolition contractor in Sun City, AZ.',
+    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
+    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junks Removal Contractor Sun City AZ',
-    description: 'Professional and affordable home and offices junks removal services in Sun City, AZ.',
+    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
+    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
   },
 };
 
 export const revalidate = 60;
+
+// Data variables
+const SERVICE_DATA = {
+  title: "Certified & Professional #1 Junks and Trash Clean Outs Services Contractor Sun City AZ",
+  areaLabel: "Sun City, AZ",
+  description:
+    "Reclaim your home or office with Sun City’s #1 certified junk and trash clean-out services. From furniture disposal to debris removal, our professional and affordable team offers trusted same-day service. Local, skilled, and ready to help—call your top-rated contractor today!",
+  subheading: "Reclaim your space with Junk Butlers",
+  bullets: [
+    {
+      title: "Friendly Agents",
+      description:
+        "Our professional Junk Butlers team provides courteous, stress-free clean outs with a helpful, neighborly Arizona smile",
+    },
+    {
+      title: "Quick Response",
+      description:
+        "Get fast, same-day trash removal in Sun City. We arrive on time to clear your clutter.",
+    },
+    {
+      title: "24/7 Support",
+      description:
+        "Our trusted junk removal experts are available around the clock to handle any emergency clean out.",
+    },
+  ],
+};
+
+
+
+const INTRO_SECTION = {
+  title:
+    "Are You Looking for a Professional and Trusted Garbage or Junks and Trash Clean Outs Services Contractor or Company in Sun City AZ? - Same Day Junk Removal",
+  paragraphs: [
+    "Finding a reliable partner for your property can be daunting, but if you are searching for a professional local junks and trash clean outs services company in Sun City AZ, look no more than Junk Butlers. As the premier home debris removal or hauling contractor in Sun City AZ, we specialize in reclaiming your space with efficiency and care. Whether you need a skilled or professional all home and offices junk or junks and trash clean outs services contractor, our team is equipped to handle everything from minor clutter to major hauls. We are recognized as an experienced and trusted all kind trash or junk removal or demolition contractor or company, offering specialized solutions like certified appliance junks and trash clean outs services and thorough garage junk removal. As a local and affordable furniture or appliance disposal clean outs contractor, we prioritize eco-friendly disposal and same-day response times to keep your project on track. Our reputation as a trusted and premier home debris removal or hauling contractor is built on transparency, competitive pricing, and a commitment to the Sun City community. From heavy furniture to construction debris, we provide the muscle and the strategy to leave your property spotless. Choose the experts who combine local knowledge with professional standards for a cleaner, stress-free environment today.",
+  ],
+};
+
+
+
+const FAQ_SECTION = {
+  title: "FAQs",
+  description:
+    "Get detailed answers about our junk removal services in Sun City, AZ.",
+  questions: [
+    {
+      question: "  What types of junk removal services do you offer?",
+      answer:
+        "Junk Butlers is your premier skilled trash cleanouts removal contractor or company in Sun City AZ. We handle everything from residential furniture and appliance disposal to commercial office debris and construction hauling. Whether it is a small garage project or a full-scale demolition cleanup, our certified team provides thorough results.",
+    },
+    {
+      question: "Do you offer same-day clean out services?",
+      answer:
+        "Yes! As a professional and trusted same day Junks and Trash Clean Outs Services contractor Sun City AZ, we prioritize your schedule. We understand that clutter can be urgent, so we offer rapid response times to clear out your home or business quickly, efficiently, and at an affordable rate.",
+    },
+    {
+      question: "Are you a licensed and insured contractor?",
+      answer:
+        "Absolutely. We are a certified and trusted all kinds household removal or cleanouts contractor or company. Our team is fully insured, providing peace of mind while we work on your property. We maintain high professional standards to ensure your residential or commercial space is handled with the utmost care.",
+    },
+    {
+      question: "How do you handle furniture and appliance disposal?",
+      answer:
+        "As a local and affordable furniture or appliance disposal clean outs contractor Sun City AZ, we focus on eco-friendly practices. We don’t just dump items; we sort through your junk to donate usable furniture and recycle appliances, ensuring a responsible disposal process that benefits the Sun City community environment.",
+    },
+    {
+      question: "Which areas do you serve for trash removal?",
+      answer:
+        "While we are the top Junks and Trash Clean Outs Services contractor in Sun City AZ, we also serve Peoria, Glendale, Surprise, Scottsdale, and Phoenix. Our team is ready to provide skilled & professional home or offices trash or trash cleanout solutions to clients across the entire Valley.",
+    },
+  ],
+};
+
+
+const SERVICE_AREAS = {
+  title: "Serving All of Phoenix Metro Area",
+  areas: [
+    {
+      city: "Phoenix",
+      region: "AZ",
+      description: "Certified & Professional #1 Junk Removal Contractor - Professional junk removal and clean out services throughout Phoenix"
+    },
+    {
+      city: "Scottsdale",
+      region: "AZ",
+      description: "Premium trash removal and hauling services in Scottsdale"
+    },
+    {
+      city: "Glendale",
+      region: "AZ", 
+      description: "Fast and reliable trash removal and junk hauling in Glendale"
+    },
+    {
+      city: "Peoria",
+      region: "AZ",
+      description: "Complete junk removal and trash hauling services for Peoria residents and businesses"
+    },
+    {
+      city: "Surprise",
+      region: "AZ",
+      description: "Comprehensive junk removal services for Surprise area"
+    },
+    {
+      city: "Sun City",
+      region: "AZ",
+      description: "Specialized clean out services for Sun City properties"
+    }
+  ]
+};
+
+const CTA_DATA = {
+  heading:
+    "Junk Butlers - Your Trusted Premier No1 Trash or Junks and Trash Clean Outs Services Company or Agency Sun City AZ",
+  subHeading: "",
+  description:
+    "Choose Junk Butlers, the skilled trash cleanouts removal contractor Sun City relies on. As a certified and trusted agency, we offer premier and skilled residential or commercial solutions. From furniture to debris, we remain the #1 choice for fast, affordable, and professional service!",
+  ctaButton: {
+    label: "Get a Free Quote",
+    href: "#contact",
+  },
+  backgroundImage: {
+    src: "/images/image-10.webp",
+    alt: "Junk removal and demolition services in Sun City, AZ",
+  },
+  overlayText:
+    "Junk Butlers delivers reliable hauling solutions designed specifically for Sun City residents and businesses. From residential cleanouts to commercial demolition debris, our professional crew ensures safe, efficient, and eco-friendly disposal every time.",
+};
+
+
+
+const SERVICES_CONTENT = {
+  title: "Our Services",
+  description: `Junk Butlers offers comprehensive solutions as the most skilled trash cleanouts removal contractor in Sun City AZ. We specialize in residential debris hauling, certified appliance disposal, and commercial office clearing. From garage cleanouts to demolition prep, our local and affordable team delivers fast, reliable results for every project.`,
+ service:[
+  {
+    heading:"Hire Now Most Trusted Residential Household Junks and Trash Clean Outs Services Contractor or Company Sun City AZ",
+    
+description:"When your home becomes overwhelmed by clutter, you need the certified and trusted all kinds household removal or cleanouts contractor or company that Sun City residents rely on. Junk Butlers provides a seamless solution for homeowners looking to reclaim their living space. As a premier and skilled residential or commercial buildings trash or junks and trash clean outs services contractor, we understand that household waste ranges from old mattresses to bulky appliances.Our team acts as your skilled trash cleanouts removal contractor or company, ensuring every room—from the attic to the basement—is cleared of unwanted items safely and efficiently. We don’t just haul away bags; we provide a comprehensive service that includes heavy lifting and responsible disposal. Don't let debris diminish your home's comfort. By hiring a skilled or professional all home and offices junk or junks and trash clean outs services contractor, you ensure a spotless result every time.",
+ },
+{
+ heading:"Local & Trusted Commercial Offices and Stores Junks or Trash Cleanouts Services Contractor or Company in Sun City AZ",
+
+description:"Maintaining a professional environment is essential for any business, and Junk Butlers is the local and trusted commercial offices and stores junks or trash cleanouts services contractor or company you can count on. We serve as a premier and skilled residential or commercial buildings trash or junks and trash clean outs services contractor, helping business owners clear out old office furniture, outdated electronics, and retail fixtures.As a skilled trash cleanouts removal contractor or company in Sun City AZ, we work around your schedule to minimize downtime, offering same-day solutions for urgent needs. Whether you are renovating a storefront or relocating an entire office suite, our certified and trusted all kinds household removal or cleanouts contractor or company expertise extends to the complex logistics of commercial waste. We provide the muscle and the transport needed to keep your workspace productive, organized, and free of hazardous clutter."
+}
+  ]
+};
+
+
+
+const OVERLAY_CARD_SECTION = {
+  heading:
+    "Looking for a Skilled and Top-Rated Home and Offices Furniture or all Kind Trash or Junk Removal Demolition Contractor Sun City AZ",
+  description: `If you are searching for the ultimate solution to your clutter problems, Junk Butlers is the answer. As a skilled & professional home or offices trash or trash cleanout contractor or company in Sun City AZ, we pride ourselves on delivering elite service for every type of property. Whether you are dealing with a messy renovation or simply clearing out years of accumulated items, our team stands out as a residential & commercial old furniture removal contractor Sun City AZ that prioritizes speed and efficiency. We understand that disposing of bulky items like sofas, desks, and heavy appliances requires specialized care.
+As a skilled trash cleanouts removal contractor or company in Sun City AZ, we utilize the right equipment to ensure your property remains undamaged during the hauling process. Our reputation as a premier and skilled residential or commercial buildings trash or junks and trash clean outs services contractor is built on our ability to handle everything from minor household debris to complex demolition projects. We are a certified and trusted all kinds household removal or cleanouts contractor or company dedicated to providing transparent pricing and exceptional results. When you hire Junk Butlers, you aren't just getting a truck; you are getting a team of experts committed to making your space clean, safe, and organized once again.`,
+  backgroundImage: {
+    src: "/images/image-10.webp",
+    alt: "Junk removal and demolition services in Sun City, AZ",
+  },
+  secondImage: {
+    src: "/images/image-2.webp",
+    alt: "Professional junk removal team in Sun City, AZ",
+  },
+};
+
+
+
+const SERVICE_DETAIL_SECTION = {
+  row1: {
+    heading:
+      "Certified or Trusted Local No1 Residential or Commercial Trash or Junks and Trash Clean Outs Services Contractor Sun City AZ",
+    description:
+      "When it comes to maintaining a clean and organized property, you deserve the peace of mind that comes with hiring the certified or trusted local No1 residential or commercial trash or junks and trash clean outs services contractor Sun City AZ. At Junk Butlers, we have established ourselves as the region's most reliable partner for total debris management. As an experienced high-qualified clean outs services contractor Sun City AZ, we understand the unique needs of both local homeowners and business managers. Our team is fully equipped to handle heavy-duty hauling, specialized electronic waste, and large-scale estate clear-outs with unmatched precision.We take pride in being a premier and skilled residential or commercial buildings trash or junks and trash clean outs services contractor, ensuring that every scrap of waste is disposed of according to environmental standards. Whether you are dealing with leftover construction materials or simply clearing out a cluttered garage, our skilled trash cleanouts removal contractor or company in Sun City AZ provides the labor and logistics to get the job done right. We aren't just a hauling service; we are a certified and trusted all kinds household removal or cleanouts contractor or company dedicated to restoring your space. Experience the difference that a professional, local team can make. Contact Junk Butlers today for the high-quality, efficient service you expect from Sun City's top-rated experts.",
+    image: "/images/image-1.webp",
+    alt: "Eco-friendly junk removal services in Sun City, AZ",
+  },
+  row2: {
+    heading: "Our Services Areas for All Major Junk and Trash Clean Outs Services Contractor",
+    description:
+      "Junk Butlers is proud to be the region's leading provider of comprehensive waste management, extending our expert solutions across the entire Valley. As your premier Sun City AZ junk removal specialist, we have built a reputation for excellence, but our reach goes far beyond city limits. We serve as the most reliable trash cleanouts contractor in Peoria AZ and Glendale AZ, ensuring that suburban homes and commercial hubs alike remain clutter-free. Our mobile teams are strategically stationed to provide rapid, same-day service in Surprise AZ, handling everything from estate clear-outs to construction debris. For those requiring high-end, efficient hauling in Scottsdale AZ, our professional crews deliver discrete and thorough cleanup services tailored to luxury properties and retail spaces.Additionally, our high-capacity trucks are constantly active throughout Phoenix AZ, managing large-scale industrial hauls and residential furniture disposal with ease. No matter where you are located within these major hubs, Junk Butlers guarantees a Certified and Trusted experience. We combine local knowledge of Arizona’s disposal regulations with a commitment to eco-friendly recycling practices. From the quiet streets of Sun City to the bustling corridors of Phoenix, we are the only name you need for professional, affordable, and local clean-out services.",
+    image: "/images/image-2.webp",
+    alt: "Same day trash removal services in Sun City, AZ",
+  },
+  row3: {
+    heading:
+      "Why Choose Junk Butlers Contractor or Company for your Junks and Trash Clean Outs Services Contractor Sun City AZ?",
+    description:
+      "Choosing Junk Butlers means partnering with a skilled and professional trusted junks and trash clean outs services or demolition services contractor in Sun City AZ. We stand out as the premier choice because we combine high-level expertise with a deeply personal, local touch. As a company owned and operated by a retired first responder, our foundation is built on integrity, discipline, and a commitment to public service. We don't just haul away your unwanted items; we provide a comprehensive experience that includes heavy lifting, sorting for donations, and eco-friendly recycling.Our clients choose us because we offer same-day response times and transparent, affordable pricing that eliminates the guesswork. Whether you are managing a complex estate clean-out, a commercial office renovation, or a simple garage decluttering project, our team arrives uniformed, on time, and fully insured. We utilize high-capacity trucks and professional-grade equipment to ensure every job is completed safely and efficiently. At Junk Butlers, we pride ourselves on leaving every site spotless, often sweeping up after the job is done. When you hire us, you are choosing a skilled and professional trusted junks and trash clean outs services or demolition services contractor dedicated to reclaiming your space and simplifying your life.",
+    image: "/images/image-7.webp",
+    alt: "Junk Butlers team working in Sun City, AZ",
+  },
+};
+
 
 async function getLandingPageData(): Promise<LandingPageData> {
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
   const id = process.env.NEXT_PUBLIC_ID;
 
   if (!templateId || !id) {
-    console.error(
+    throw new Error(
       "Missing required environment variables: NEXT_PUBLIC_TEMPLATE_ID, NEXT_PUBLIC_ID"
     );
-    notFound();
   }
 
-  const landingPageData = await fetchLandingPageForSSG(templateId!, id!);
+  const landingPageData = await fetchLandingPageForSSG(templateId, id);
 
   if (!landingPageData) {
-    console.error(
+    throw new Error(
       `Landing page not found: templateId=${templateId}, id=${id}`
     );
-    notFound();
   }
 
   return landingPageData;
 }
 
-export default async function CleanOutsSunCityPage() {
+export default async function JunkRemovalPhoenixPage() {
   const landingPageData = await getLandingPageData();
-
-  const service = {
-    title: "Certified & Professional #1 Junks Removal Contractor Sun City AZ",
-    areaLabel: "Sun City, AZ",
-    description: "Reclaim your space with Junk Butlers, your local and trusted residential or commercial junks removal and demolition contractor in Sun City, AZ. We provide professional and affordable home and offices junks removal services, including same day trash removal and furniture disposal.",
-    bullets: [
-      {
-        title: "Friendly Agents",
-        description: "Our local and trusted team provides professional, polite service for every Sun City junk hauling project."
-      },
-      {
-        title: "Quick Response",
-        description: "Need it gone? Contact Junk Butlers for professional and trusted same day trash removal today."
-      },
-      {
-        title: "24/7 Support",
-        description: "We offer affordable home and offices junks removal services around the clock for your convenience."
-      }
-    ]
-  };
-
   const servicesContent = landingPageData.content?.services;
-  const servicesImages =
-    landingPageData.images?.filter((img) => img.slotName.includes("services")) || [];
-
-  const areaIntroParagraphs = [
-    "When you are overwhelmed by clutter, finding an experienced and trusted all kind trash or junk removal or demolition contractor or company in Sun City AZ is essential for peace of mind. At Junk Butlers, we specialize in being the most skilled or professional all home and offices junk or trash removal contractor in Sun City AZ, ensuring your property is cleared efficiently. Whether you are dealing with a messy renovation or a simple spring cleaning, we serve as your trusted and premier home debris removal or hauling contractor in Sun City AZ.",
-    "Our team is recognized as a professional local trash removal company in Sun City AZ that prioritizes speed and reliability. We provide specialized solutions, including certified appliance junks removal service Sun City AZ, ensuring heavy items are handled safely. If you are looking to reclaim your parking space, we are the best garage junk removal contractor Sun City AZ residents rely on. As a local and affordable furniture or appliance disposal contractor Sun City AZ, we guarantee transparent pricing without hidden fees. From residential cleanouts to complex commercial site clearing, our \"same day\" promise means your junk disappears today. Trust the experts who understand the Sun City community’s needs—choose the most dedicated local team for every haul.",
-  ];
-
-  const whyChooseUsParagraphs = [
-    "Junk Butlers - Your Trusted Premier No1 Junk Removal Company or Agency Sun City AZ",
-    "Experience the gold standard with Junk Butlers, your skilled and professional home and office junk removal contractor. From certified furniture disposal to affordable debris hauling, our trusted Sun City team delivers same-day solutions to keep your property clean and clutter-free.",
-    "Looking for a Skilled and Top-Rated Home and Offices Junk Removal Demolition Contractor Sun City AZ",
-    "If you are looking for a skilled and top-rated home and offices junk removal demolition contractor Sun City AZ, look no more than the experts at Junk Butlers. Our reputation as a premier local provider is built on delivering efficient, high-quality cleanup solutions for every type of property. As a skilled & professional home or offices junks or trash cleanout contractor or company in Sun City AZ, we understand that clutter can be overwhelming.",
-    "We take pride in being a versatile residential & commercial junk removal contractor Sun City AZ, helping you dispose of heavy desks, bulky sofas, and outdated office workstations without you lifting a finger. At Junk Butlers, we don't just haul away trash; we provide a full-service experience that includes meticulous debris removal and light demolition. Our commitment to being a skilled and top-rated agency means we prioritize safety, speed, and environmental responsibility in every load. from small residential pickups to large-scale industrial cleanouts, we are the trusted partners you need to reclaim your space.",
-    "Certified or Trusted Local No1 Eco Friendly Junk Removal Contractor Sun City AZ",
-    "Choosing the right partner for junk removal services means finding a certified or trusted local no1 eco-friendly junk removal contractor Sun City AZ that values the environment as much as you do. Junk Butlers is proud to lead the industry by providing sustainable disposal solutions that prioritize recycling and donating over simply hitting the landfill. As an experienced high-qualified junk hauling services contractor Sun City AZ, we have mastered the logistics of eco-conscious removal, ensuring that every load is sorted with precision to minimize our carbon footprint."
-  ];
-
-  const faqQuestions = [
-    {
-      question: "1. What items do you remove in Sun City, AZ?",
-      answer:
-        "As a skilled junks cleanouts removal contractor or company in Sun City AZ, Junk Butlers handles almost everything. We specialize in certified appliance junks removal, old furniture, electronics, yard waste, and construction debris. Whether it is a single sofa or a full garage, our team clears it quickly.",
-    },
-    {
-      question: "2. Do you offer same-day junk removal services?",
-      answer:
-        "Yes! We are a professional and trusted same day trash removal contractor Sun City AZ. We understand that clutter can be urgent, so we prioritize rapid response times. Contact us early in the day to secure your spot and have your unwanted items hauled away by this evening.",
-    },
-    {
-      question: "3. Are your junk removal services environmentally friendly?",
-      answer:
-        "Absolutely. As a certified or trusted local no1 eco-friendly junks or trash removal contractor, we prioritize recycling and donations. Junk Butlers works hard to keep Sun City green by ensuring that appliances, metals, and usable furniture are diverted from landfills whenever possible for a sustainable future.",
-    },
-    {
-      question: "4. Do you provide commercial office cleanout services?",
-      answer:
-        "Yes, we are a local and trusted commercial offices cleanouts or business junk removal contractor. We help Sun City businesses dispose of office furniture, old computers, and retail fixtures. Our team works efficiently to minimize disruption to your operations, ensuring your professional workspace remains clean, organized, and productive.",
-    },
-    {
-      question: "5. How do you determine your removal pricing?",
-      answer:
-        "We are a local and affordable furniture or appliance disposal contractor Sun City AZ that offers transparent, volume-based pricing. Our rates depend on the space your items occupy in our truck. We provide free, no-obligation estimates to ensure you get the most competitive price for your specific haul.",
-    },
-  ];
-
-  // Use hardcoded service areas for Arizona cities
-  const serviceAreas = [
-    {
-      city: "Peoria",
-      region: "AZ",
-      description: "Complete clean out services for Peoria properties including homes, businesses, and estates"
-    },
-    {
-      city: "Phoenix",
-      region: "AZ",
-      description: "Professional property cleanouts throughout Phoenix for residential and commercial properties"
-    },
-    {
-      city: "Glendale",
-      region: "AZ",
-      description: "Thorough clean out services for Glendale homes and businesses"
-    },
-    {
-      city: "Sun City",
-      region: "AZ",
-      description: "Specialized estate cleanouts and senior property cleanouts in Sun City"
-    },
-    {
-      city: "Surprise",
-      region: "AZ",
-      description: "Comprehensive clean out services for Surprise area properties"
-    },
-    {
-      city: "Scottsdale",
-      region: "AZ",
-      description: "Premium clean out services for Scottsdale luxury properties and estates"
-    }
-  ];
+  const servicesImages = landingPageData.images?.filter((img) => img.slotName.includes("services")) || [];
 
   return (
     <ServiceAreaLayout
       landingPageData={landingPageData}
-      title={`${service.title} in ${service.areaLabel}`}
+      title={`${SERVICE_DATA.title} in ${SERVICE_DATA.areaLabel}`}
       description={
         landingPageData.seoData.description ||
-        `${service.title} services in ${service.areaLabel} for residential and commercial properties.`
+        `${SERVICE_DATA.title} services in ${SERVICE_DATA.areaLabel} for residential and commercial properties.`
       }
     >
       <ServiceAreaHeroSection
-        serviceName="Junk Removal"
-        areaLabel="Sun City, AZ"
-        heading={service.title}
-        subheading="Professional • Reliable • Same Day Service"
-        description={service.description}
-        bullets={service.bullets}
-        images={landingPageData.images}
+        serviceName={SERVICE_DATA.title}
+        areaLabel={SERVICE_DATA.areaLabel}
+        heading={SERVICE_DATA.title}
+        subheading={SERVICE_DATA.subheading}
+        description={SERVICE_DATA.description}
+        images={landingPageData.images || []}
         theme={landingPageData.themeData}
+        bullets={SERVICE_DATA.bullets}
       />
 
       <ServiceAreaIntroSection
-        title="Are You Looking for a Professional and Trusted Junk or Trash Removal Contractor or Company in Sun City AZ? - Same Day Junk Removal"
-        paragraphs={areaIntroParagraphs}
+        title={INTRO_SECTION.title}
+        paragraphs={INTRO_SECTION.paragraphs}
         theme={landingPageData.themeData}
       />
 
-      <WhyChooseUsSection
-        title="Why Choose Junk Butlers for Sun City Junk Removal"
-        paragraphs={whyChooseUsParagraphs}
-        theme={landingPageData.themeData}
-      />
+       <ServiceAreaServicesSection
+                title={SERVICES_CONTENT.title}
+                description={SERVICES_CONTENT.description}
+                services={SERVICES_CONTENT.service}
+                
+                theme={landingPageData.themeData}
+                images={servicesImages}
+              />
 
-      <ServiceFeaturesSection
-        title="Our Premium Service Features"
-        description="We provide the highest quality junk removal and demolition services in Sun City, AZ."
-        features={[
-          "Certified Appliance Removal",
-          "Eco-Friendly Disposal",
-          "Same-Day Hauling",
-          "Residential Cleanouts",
-          "Commercial Junk Removal",
-          "Professional Demolition"
-        ]}
-        theme={landingPageData.themeData}
-      />
-
-      {servicesContent && (
-        <ServicesSection
-          title={servicesContent.title || "Our Services"}
-          description={`Our Services
-
-Junk Butlers provides the most skilled junks cleanouts removal contractor or company in Sun City AZ. From certified appliance junks removal to garage junk removal, we handle it all. Trust our local and affordable furniture or appliance disposal contractor for premier home debris removal or hauling across Sun City.
-
-Hire Now Most Trusted Residential Household Junks Removal Contractor or Company Sun City AZ
-
-When clutter takes over your home, you need a certified and trusted all kinds household removal or cleanouts contractor or company Sun City AZ to restore order. Junk Butlers specializes in helping homeowners reclaim their living space through efficient and stress-free services. As the premier and skilled residential or commercial buildings junks or trash removal contractor Sun City AZ, we handle everything from old mattress disposal to full basement cleanouts.
-
-Local & Trusted Commercial Offices Cleanouts or Business Junk Removal Contractor or Company in Sun City AZ
-
-Business owners know that a cluttered workspace hinders productivity. That is why Junk Butlers is the leading local & trusted commercial offices cleanouts or business junk removal contractor or company in Sun City AZ. We serve as a premier and skilled residential or commercial buildings junks or trash removal contractor Sun City AZ, offering tailored solutions for property managers, retail stores, and corporate offices.`}
-          services={servicesContent.services}
-          theme={landingPageData.themeData}
-          images={servicesImages}
-        />
-      )}
 
       <CTASection
-        data={{
-          heading: "Junk Butlers - Your Trusted Premier No1 Trash or Junks Removal Company or Agency Sun City AZ",
-          subHeading: "",
-          description:
-            "Experience the best with Junk Butlers, your skilled junks cleanouts removal contractor or company in Sun City AZ. We provide professional and affordable home and offices junks removal services, specializing in trusted same day trash removal and furniture disposal.",
-          ctaButton: { label: "Get a Free Quote", href: "#contact" },
-        }}
+        data={CTA_DATA}
         theme={landingPageData.themeData}
       />
 
+
+
       <ServiceOverlayCardSection
-        heading="Looking for a Skilled and Top-Rated Home and Offices Trash or Junk Removal Demolition Contractor Sun City AZ"
-        description={`If you are searching for a skilled and top-rated home and offices trash or junk removal demolition contractor Sun City AZ, look no more than the experts at Junk Butlers. Our team has built a reputation as the most skilled & professional home or offices junks or trash cleanout contractor or company in Sun City AZ, helping residents and business owners reclaim their valuable space. We understand that junk accumulation can be stressful, which is why we provide streamlined, heavy-duty hauling solutions tailored to your specific needs. As a premier residential & commercial old furniture removal contractor Sun City AZ, we have the tools and experience to handle everything from bulky sofas to entire office workstations.<br/><br/>Junk Butlers doesn't just pick up trash; we offer comprehensive demolition and cleanout services that ensure your property is left spotless and ready for its next use. Our commitment to being a skilled and top rated home and offices trash or junk removal demolition contractor Sun City AZ means we prioritize safety, efficiency, and eco-friendly disposal methods. Whether you are clearing out a residential garage or managing a large-scale commercial renovation, our professional crew is dedicated to providing five-star service. Trust the local leaders who combine affordable pricing with unmatched expertise. Contact us today to experience why we are the preferred choice for all demolition and junk hauling projects throughout the Sun City area.`}
-        backgroundImage={{
-          src: "/images/image-10.webp",
-          alt: "Junk removal and demolition services in Sun City, AZ",
-        }}
-        secondImage={{
-          src: "/images/image-2.webp",
-          alt: "Professional junk removal team in Sun City, AZ",
-        }}
+        heading={OVERLAY_CARD_SECTION.heading}
+        description={OVERLAY_CARD_SECTION.description}
+        backgroundImage={OVERLAY_CARD_SECTION.backgroundImage}
+        secondImage={OVERLAY_CARD_SECTION.secondImage}
         theme={landingPageData.themeData}
       />
 
       <ServiceAreaDetailSection
         theme={landingPageData.themeData}
         row1={{
-          heading: "Certified or Trusted Local No1 Eco Friendly Junks or Trash Removal Contractor Sun City AZ",
-          description:
-            "Choosing a certified or trusted local no1 eco-friendly junks or trash removal contractor Sun City AZ means more than just clearing space; it means ensuring your unwanted items are handled with environmental responsibility. At Junk Butlers, we take our commitment to the planet seriously. As an experienced high-qualified junks hauling services contractor Sun City AZ, we prioritize recycling and donating usable goods over simply hauling everything to a landfill. Our team understands the unique needs of the Sun City community, providing a green solution for those who want to declutter their homes and offices responsibly.\n\nWhen you hire Junk Butlers, you are partnering with a certified or trusted local no1 eco-friendly junks or trash removal contractor Sun City AZ that combines professional efficiency with sustainable practices. Our crew is trained to identify materials that can be repurposed, from old metals to electronics and furniture. As an experienced high-qualified junks hauling services contractor Sun City AZ, we manage the heavy lifting and sorting so you don't have to. We believe that professional junk removal should be both affordable and ethically sound. By choosing our eco-friendly services, you are helping to keep Sun City beautiful while enjoying a clean, junk-free environment. Whether it is a single appliance or a full-property cleanout, we provide the reliable, high-quality service you deserve.",
+          heading: SERVICE_DETAIL_SECTION.row1.heading,
+          description: SERVICE_DETAIL_SECTION.row1.description
         }}
         row1Image={{
-          src: "/images/image-10.webp",
-          alt: "Eco-friendly junk removal services in Sun City, AZ",
+          src: SERVICE_DETAIL_SECTION.row1.image,
+          alt: SERVICE_DETAIL_SECTION.row1.alt
         }}
         row2={{
-          heading: "Our Services Areas for All Major Junk or Trash Removal Contractor",
-          description:
-            "As a premier hauling provider, we take pride in being the best provider for our services areas for all major junk or trash removal contractor needs across the Valley. Junk Butlers is strategically positioned to offer rapid, reliable, and professional cleanout solutions to a wide range of communities. Our primary focus remains serving the residents of Sun City AZ, where we have built a reputation for excellence, but our fleet extends far beyond those borders. We provide top-tier junk hauling and demolition services to the growing neighborhoods of Surprise AZ and the bustling residential and commercial hubs of Peoria AZ.\n\nIf you are located further east, our professional crews are frequently dispatched to Glendale AZ, ensuring that both homes and offices stay clutter-free. Furthermore, we maintain a strong presence in Phoenix AZ, handling large-scale urban removals and specialized trash hauling projects with ease. For those in high-end residential or retail spaces, we also serve as the leading removal experts in Scottsdale AZ. No matter which of these major cities you are located in, our commitment to being the most trusted local contractor remains the same. We ensure that every zip code within our service area receives the same high standard of eco-friendly disposal and \"same day\" efficiency that our brand is known for.",
+          heading: SERVICE_DETAIL_SECTION.row2.heading,
+          description: SERVICE_DETAIL_SECTION.row2.description
         }}
         row2Image={{
-          src: "/images/image-2.webp",
-          alt: "Service areas coverage map for junk removal services",
+          src: SERVICE_DETAIL_SECTION.row2.image,
+          alt: SERVICE_DETAIL_SECTION.row2.alt
         }}
-        row3={{
-          heading: "Why Choose Junk Butlers Contractor or Company for Your Trash Removal Services Contractor Sun City AZ?",
-          description:
-            "Deciding on the right team for your cleanout project is essential for a stress-free experience, so why choose Junk Butlers contractor or company for your trash removal services contractor Sun City AZ? The answer lies in our unwavering commitment to professionalism, punctuality, and the local community. As a skilled and professional trusted trash removal or demolition services contractor in Sun City AZ, we understand the specific needs of residents and business owners in this area. We don't just haul away your unwanted items; we provide a comprehensive service that includes heavy lifting, sorting, and responsible disposal, ensuring your property is treated with the utmost respect.\n\nJunk Butlers stands out because we combine the power of a large-scale operation with the personalized touch of a local business. When you hire us, you are partnering with a skilled and professional trusted trash removal or demolition services contractor in Sun City AZ that prioritizes your schedule and your budget. Our transparent pricing and \"same day\" availability make us the most convenient choice for urgent projects. We handle everything from minor household clutter to major site demolitions, proving that no job is too big or too small for our expert crew. Choose us for a cleaner, safer, and junk-free environment today.",
-        }}
-        row3Image={{
-          src: "/images/image-3.webp",
-          alt: "Professional junk removal team working in Sun City, AZ",
-        }}
+        row3={SERVICE_DETAIL_SECTION.row3 ? {
+          heading: SERVICE_DETAIL_SECTION.row3.heading,
+          description: SERVICE_DETAIL_SECTION.row3.description
+        } : undefined}
+        row3Image={SERVICE_DETAIL_SECTION.row3 ? {
+          src: SERVICE_DETAIL_SECTION.row3.image,
+          alt: SERVICE_DETAIL_SECTION.row3.alt
+        } : undefined}
       />
 
-      {faqQuestions.length > 0 && (
-        <FAQSection
-          title="FAQs"
-          description="Get detailed answers about our junk removal services in Sun City, AZ."
-          questions={faqQuestions}
-          theme={landingPageData.themeData}
-        />
-      )}
 
-      <ServiceAreasSection
-        serviceAreas={serviceAreas}
+ <ServiceAreasSection
+        serviceAreas={SERVICE_AREAS.areas}
         themeData={landingPageData.themeData}
       />
+
+
+      <FAQSection
+        title={FAQ_SECTION.title}
+        description={FAQ_SECTION.description}
+        questions={FAQ_SECTION.questions}
+        theme={landingPageData.themeData}
+      />
+
     </ServiceAreaLayout>
   );
 }

@@ -95,9 +95,9 @@ export default function HeroSection({ title, subtitle, description, ctaButton, i
       )}
 
       {/* Main content container */}
-      <div className="relative z-10 min-h-screen flex flex-col lg:flex-row items-center">
+      <div className="relative z-10 lg:min-h-screen flex flex-col lg:flex-row lg:items-center">
         {/* Left side - Content */}
-        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-12 py-16 lg:py-0">
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-12 py-5 lg:py-0">
           <div className="max-w-3xl text-center lg:text-left">
             <div>
               <h1
