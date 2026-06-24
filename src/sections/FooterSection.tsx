@@ -89,12 +89,10 @@ export default function FooterSection({
         <nav className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">
           {[
             { href: "#home", label: "Home" },
-            { href: "#about", label: "About" },
-            { href: "#services", label: "Services" },
-            { href: "#testimonials", label: "Testimonials" },
-            { href: "#gallery", label: "Gallery" },
-            { href: "#contact", label: "Contact" },
-            { href: "#service-areas", label: "Service Areas" },
+            { href: "/about-us", label: "About" },
+            { href: "/services", label: "Services" },
+            { href: "/contact-us", label: "Contact" },
+            { href: "/serving-areas", label: "Serving Areas" },
           ].map((link, i) => (
             <Link
               key={i}
@@ -175,6 +173,19 @@ export default function FooterSection({
 
         {/* Divider */}
         <div className="mt-10 border-t" style={{ borderColor: `${secondaryColor}1A` }} />
+
+        <div className="mt-6 text-sm text-center" style={{ color: `${secondaryColor}CC` }}>
+          2026 ©junksbutlers. All Rights Reserved. Build by{" "}
+          <a
+            href="https://usbrandbooster.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline underline-offset-4"
+            style={{ color: primaryColor }}
+          >
+            US Brand Booster
+          </a>
+        </div>
       </div>
     </footer>
   );

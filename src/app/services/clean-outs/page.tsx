@@ -7,11 +7,19 @@ import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/app/services/[id]/components/Breadcrumbs";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Professional Clean Out Services | Complete Property Cleanouts',
   description: 'Expert clean out services for homes, businesses, estates, and properties. Professional, efficient, and thorough cleanout solutions for all your needs.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/clean-outs',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'Professional Clean Out Services | Complete Property Cleanouts',
     description: 'Expert clean out services for homes, businesses, estates, and properties. Professional, efficient, and thorough cleanout solutions for all your needs.',
@@ -137,12 +145,12 @@ export default async function CleanOutsPage() {
                 <div className="bg-gray-50 p-6 rounded-lg">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Service Areas</h3>
                   <ul className="space-y-2 text-gray-600">
-                    <li>• Peoria, AZ</li>
-                    <li>• Phoenix, AZ</li>
-                    <li>• Glendale, AZ</li>
-                    <li>• Sun City, AZ</li>
-                    <li>• Surprise, AZ</li>
-                    <li>• Scottsdale, AZ</li>
+                    <li>• <Link href="/services/clean-outs/service-areas/peoria-az" className="text-blue-600 hover:text-blue-800 hover:underline">Peoria, AZ</Link></li>
+                    <li>• <Link href="/services/clean-outs/service-areas/phoenix-az" className="text-blue-600 hover:text-blue-800 hover:underline">Phoenix, AZ</Link></li>
+                    <li>• <Link href="/services/clean-outs/service-areas/glendale-az" className="text-blue-600 hover:text-blue-800 hover:underline">Glendale, AZ</Link></li>
+                    <li>• <Link href="/services/clean-outs/service-areas/sun-city-az" className="text-blue-600 hover:text-blue-800 hover:underline">Sun City, AZ</Link></li>
+                    <li>• <Link href="/services/clean-outs/service-areas/surprise-az" className="text-blue-600 hover:text-blue-800 hover:underline">Surprise, AZ</Link></li>
+                    <li>• <Link href="/services/clean-outs/service-areas/scottsdale-az" className="text-blue-600 hover:text-blue-800 hover:underline">Scottsdale, AZ</Link></li>
                   </ul>
                 </div>
               </div>

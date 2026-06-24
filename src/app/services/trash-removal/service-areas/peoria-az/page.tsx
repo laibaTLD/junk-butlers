@@ -14,17 +14,24 @@ import { Metadata } from "next";
 
 // Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+  title: 'Get Professional Trash Removal Contractors In Peoria AZ | Quick Service',
+  description: 'Need trash removal contractors in Peoria, AZ? We haul junk, debris, and old furniture with fast, reliable service. Transparent pricing and eco-friendly disposal.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/trash-removal/service-areas/peoria-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+    title: 'Get Professional Trash Removal Contractors In Peoria AZ | Quick Service',
+    description: 'Need trash removal contractors in Peoria, AZ? We haul junk, debris, and old furniture with fast, reliable service. Transparent pricing and eco-friendly disposal.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
+    title: 'Get Professional Trash Removal Contractors In Peoria AZ | Quick Service',
+    description: 'Need trash removal contractors in Peoria, AZ? We haul junk, debris, and old furniture with fast, reliable service. Transparent pricing and eco-friendly disposal.',
   },
 };
 
@@ -92,10 +99,10 @@ const CTA_DATA = {
   description: "Experience the gold standard with Junk Butlers, your professional and trusted same-day trash removal contractor in Peoria, AZ. We provide skilled home debris removal and affordable furniture disposal, ensuring a clean, junk-free space with our certified hauling expertise.",
   ctaButton: { 
     label: "Get a Free Quote", 
-    href: "#contact" 
+    href: "/contact-us" 
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Phoenix, AZ",
   },
   overlayText: "Our team understands the logistics of Glendale property management, making us the premier choice for both homeowners and business managers alike. When you need a skilled and professional home or offices junks or trash cleanout contractor, you need a team that values your time and maintains a clean workspace from start to finish. From demolition debris to office cubicle disposal, Junk Butlers handles it all. As a residential and commercial old furniture removal contractor, we ensure that your unwanted items are disposed of ethically and efficiently. Don't settle for less when you can hire the highest-rated experts in the Valley. Let us transform your space today with our reliable, high-capacity junk removal and demolition services."

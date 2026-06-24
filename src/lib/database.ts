@@ -1,12 +1,26 @@
 import { Pool } from "pg";
+import { cache } from "react";
 import { LandingPageData, Image } from "@/types/template";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+const globalForPg = globalThis as typeof globalThis & {
+  pgPool?: Pool;
+};
+
+function getPool(): Pool {
+  if (!globalForPg.pgPool) {
+    const isBuild = process.env.NEXT_PHASE === "phase-production-build";
+    globalForPg.pgPool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      // One pool per process; cap connections during parallel SSG
+      max: isBuild ? 1 : 5,
+      idleTimeoutMillis: 10_000,
+    });
+  }
+  return globalForPg.pgPool;
+}
 
 export async function query(text: string, params?: unknown[]) {
-  const client = await pool.connect();
+  const client = await getPool().connect();
   try {
     const result = await client.query(text, params);
     return result.rows;
@@ -51,10 +65,13 @@ export async function fetchLandingPageWithImages(templateId: string, id: string)
   return { ...landingPage, images };
 }
 
-// Optimized function for SSG build-time data fetching
-export async function fetchLandingPageForSSG(templateId: string, id: string): Promise<LandingPageData | null> {
+const ssgLandingPageCache = new Map<string, Promise<LandingPageData | null>>();
+
+async function fetchLandingPageForSSGImpl(
+  templateId: string,
+  id: string
+): Promise<LandingPageData | null> {
   try {
-    // Single optimized query to fetch landing page with images
     const rows = await query(`
       SELECT 
         lp.*,
@@ -78,17 +95,28 @@ export async function fetchLandingPageForSSG(templateId: string, id: string): Pr
       WHERE lp."templateId" = $1 AND lp.id = $2
       GROUP BY lp.id
     `, [templateId, id]);
-    
+
     if (rows.length === 0) return null;
-    
-    const result = rows[0] as LandingPageData & { images: Image[] };
-    
-    return result;
+
+    return rows[0] as LandingPageData & { images: Image[] };
   } catch (error) {
-    console.error('Error fetching landing page data for SSG:', error);
-    return null;
+    console.error("Error fetching landing page data for SSG:", error);
+    throw error;
   }
 }
+
+// Optimized function for SSG build-time data fetching (deduped per worker + per render)
+export const fetchLandingPageForSSG = cache(
+  async (templateId: string, id: string): Promise<LandingPageData | null> => {
+    const key = `${templateId}:${id}`;
+    let pending = ssgLandingPageCache.get(key);
+    if (!pending) {
+      pending = fetchLandingPageForSSGImpl(templateId, id);
+      ssgLandingPageCache.set(key, pending);
+    }
+    return pending;
+  }
+);
 
 // Function to get all available landing pages for static generation
 export async function getAllLandingPageIds(): Promise<Array<{ templateId: string; id: string }>> {

@@ -29,7 +29,9 @@ export default function Navbar({
   serviceAreas, // eslint-disable-line @typescript-eslint/no-unused-vars
 }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [showAreasModal, setShowAreasModal] = useState(false);
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+
 
   // Use hardcoded service areas for Arizona cities
   const hardcodedAreas: ServiceArea[] = [
@@ -139,13 +141,13 @@ export default function Navbar({
               Home
             </Link>
             <Link
-              href="/#about"
+              href="/about-us"
               className="text-white/90 hover:text-white transition-colors font-medium"
             >
               About
             </Link>
             <Link
-              href="/#services"
+              href="/services"
               className="text-white/90 hover:text-white transition-colors font-medium"
             >
               Services
@@ -199,12 +201,6 @@ export default function Navbar({
               </div>
             </div>
             <Link
-              href="/#testimonials"
-              className="text-white/90 hover:text-white transition-colors font-medium"
-            >
-              Testimonials
-            </Link>
-            <Link
               href="/contact-us"
               className="text-white/90 hover:text-white transition-colors font-medium"
             >
@@ -255,9 +251,9 @@ export default function Navbar({
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden h-screen">
+          <div className="lg:hidden h-screen overflow-y-auto">
             <div
-              className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-white/20 h-full flex flex-col items-center justify-center"
+              className="px-2 pb-3 space-y-1 sm:px-3 border-t border-white/20 h-full flex flex-col items-center justify-start pt-16"
               style={{
                 background: themeData
                   ? `linear-gradient(135deg, ${themeData.primaryColor}aa, ${themeData.secondaryColor}aa, #000000)`
@@ -265,54 +261,145 @@ export default function Navbar({
               }}
             >
               <Link
-onClick={() => setIsOpen(false)}
-href="/"
-                className="block px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+                href="/"
+                className="block w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
               >
                 Home
               </Link>
+              
               <Link
-onClick={() => setIsOpen(false)}
-href="/#about"
-                className="block px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+                href="/about-us"
+                className="block w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
               >
                 About
               </Link>
+              
               <Link
-onClick={() => setIsOpen(false)}
-href="/#services"
-                className="block px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+                href="/services"
+                className="block w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
               >
                 Services
               </Link>
+              
+              {/* Mobile Serving Areas Button */}
+              <button
+                onClick={() => setShowAreasModal(true)}
+                className="w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
+              >
+                Serving Areas
+              </button>
+              
               <Link
-onClick={() => setIsOpen(false)}
-href="/#testimonials"
-                className="block px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+                href="/#testimonials"
+                className="block w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
               >
                 Testimonials
               </Link>
+              
               <Link
-onClick={() => setIsOpen(false)}
-href="/contact-us"
-                className="block px-3 py-2 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium"
+                onClick={() => setIsOpen(false)}
+                href="/contact-us"
+                className="block w-full px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium text-center"
               >
                 Contact
               </Link>
+              
               <Link
-onClick={() => setIsOpen(false)}
-href="/#contact"
-                className="block mx-3 my-2 text-white px-4 py-2 rounded-lg text-center transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-white/20"
+                href={phoneNumber ? `tel:${phoneNumber}` : "#"}
+                className="w-full max-w-xs mx-auto mt-4 px-6 py-3 text-white rounded-lg text-center transition-all duration-300 border border-white/20 hover:border-white/40 backdrop-blur-sm hover:bg-white/20 font-medium"
                 style={{
                   background: "rgba(255, 255, 255, 0.1)",
                 }}
               >
-                Get Started
+                Call Us Now
               </Link>
             </div>
           </div>
         )}
       </div>
+
+      {/* Areas Modal */}
+      {showAreasModal && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowAreasModal(false)}
+          />
+          <div className="flex min-h-screen items-center justify-center p-4">
+            <div 
+              className="relative w-full max-w-md max-h-[80vh] rounded-2xl shadow-2xl overflow-hidden"
+              style={{
+                background: themeData
+                  ? `linear-gradient(135deg, ${themeData.primaryColor}, ${themeData.secondaryColor || themeData.primaryColor}cc)`
+                  : "linear-gradient(135deg, #1f2937, #111827)",
+                border: themeData ? `1px solid ${themeData.secondaryColor || themeData.primaryColor}40` : "1px solid #374151"
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6 overflow-y-auto max-h-[70vh]">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 
+                    className="text-2xl font-bold text-white"
+                  >
+                    Service Areas
+                  </h2>
+                  <button 
+                    onClick={() => setShowAreasModal(false)}
+                    className="p-2 -mr-2 text-white/80 hover:text-white transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                <div className="space-y-6">
+                  {servingAreaGroups.map((group) => (
+                    <div key={group.href} className="mb-6">
+                      <h3 
+                        className="text-lg font-semibold mb-3 pb-2 text-white border-b border-white/20"
+                      >
+                        {group.label}
+                      </h3>
+                      <div className="grid grid-cols-2 gap-2">
+                        {group.areas.map((area) => {
+                          const areaSlug = area.toLowerCase().replace(/,/g, "").replace(/\s+/g, "-");
+                          return (
+                            <Link
+                              key={`${area}-${group.href}`}
+                              href={`${group.href}/service-areas/${areaSlug}`}
+                              onClick={() => {
+                                setIsOpen(false);
+                                setShowAreasModal(false);
+                              }}
+                              className="block px-3 py-2 text-sm text-white/90 hover:text-white rounded-lg transition-colors text-center bg-white/5 hover:bg-white/10 border border-white/10"
+                            >
+                              {area}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="p-4 border-t border-white/10 bg-black/30">
+                <button
+                  onClick={() => setShowAreasModal(false)}
+                  className="w-full py-2 px-4 rounded-lg transition-colors font-medium bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

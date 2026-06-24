@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import BusinessOverviewSection from '@/sections/BusinessOverviewSection';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Junk Butlers',
-  description: 'Get in touch with Junk Butlers for all your junk removal needs. We\'re here to help you reclaim your space!',
+  title: 'Get in Touch | Junk Removal Services Phoenix AZ',
+  description: 'Contact Junks Butlers for professional junk removal, trash removal, clean outs & junk hauling in Phoenix, AZ. Call now for free Quote!',
 };
 
 // Mock data - in a real app, this would come from your database or CMS

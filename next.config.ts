@@ -13,6 +13,8 @@ const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
     ppr: false, // Keep false for stability
+    // Avoid exhausting Postgres max_connections during parallel SSG
+    staticPageGenerationConcurrency: 2,
   },
   // Configure for optimal SSG + ISR
   async rewrites() {

@@ -14,17 +14,24 @@ import { Metadata } from "next";
 
 // Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+  title: 'Certified Trash Clean Outs Services In Phoenix, AZ | Junks Butlers',
+  description: 'Junks Butlers offers trash clean outs services in Phoenix, AZ. We handle all major junk and trash clean outs with fast, same-day junk removal you can trust.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/clean-outs/service-areas/phoenix-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+    title: 'Certified Trash Clean Outs Services In Phoenix, AZ | Junks Butlers',
+    description: 'Junks Butlers offers trash clean outs services in Phoenix, AZ. We handle all major junk and trash clean outs with fast, same-day junk removal you can trust.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
+    title: 'Certified Trash Clean Outs Services In Phoenix, AZ | Junks Butlers',
+    description: 'Junks Butlers offers trash clean outs services in Phoenix, AZ. We handle all major junk and trash clean outs with fast, same-day junk removal you can trust.',
   },
 };
 
@@ -146,10 +153,10 @@ const CTA_DATA = {
     "As Phoenix’s top-rated agency, Junk Butlers delivers professional and affordable solutions. We are the local and certified experts for skilled debris, furniture, and trash clean outs. Trust our skilled residential and commercial team for trusted same-day removal services today!",
   ctaButton: {
     label: "Get a Free Quote",
-    href: "#contact",
+    href: "/contact-us",
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Sun City, AZ",
   },
   overlayText:

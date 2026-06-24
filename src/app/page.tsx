@@ -13,6 +13,7 @@ import ServiceHighlightsSection from "@/sections/ServiceHighlightsSection";
 import { LandingPageData } from "@/types/template";
 import CompanyDetails from "@/sections/CompanyDetails";
 import { fetchLandingPageForSSG } from "@/lib/database";
+import { getGalleryImages } from "@/lib/imageUtils";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -57,7 +58,11 @@ async function getLandingPageData(): Promise<LandingPageData> {
 // Generate metadata for Next.js App Router
 export async function generateMetadata(): Promise<Metadata> {
   const landingPageData = await getLandingPageData();
-  const { seoData, businessName, images } = landingPageData;
+  const { businessName, images } = landingPageData;
+  
+  // New metadata
+  const title = 'Junks Butlers Professional Junk & Trash Removal Services | Book Fast & Reliable Pickup';
+  const description = 'Trusted junk and trash removal by Junks Butlers. Same-day service, upfront pricing, and eco-friendly disposal for homes and businesses. Schedule your cleanout now.';
   
   // Get images for Open Graph
   const logoImage = images?.find((img) => img.slotName === 'logo-image')?.imageUrl;
@@ -65,23 +70,23 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImage = logoImage || heroImage;
   
   return {
-    title: seoData.title,
-    description: seoData.description,
-    keywords: seoData.keywords?.join(', '),
+    title: title,
+    description: description,
+    keywords: 'junk removal, trash removal, junk hauling, debris removal, same-day junk removal, eco-friendly disposal',
     authors: [{ name: businessName }],
     creator: businessName,
     publisher: businessName,
-    robots: seoData.isIndex ? 'index,follow' : 'noindex,nofollow',
+    robots: 'index,follow',
     
     // Open Graph
     openGraph: {
-      title: seoData.title,
-      description: seoData.description,
-      url: seoData.canonicalUrl,
+      title: title,
+      description: description,
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://junksbutlers.com',
       siteName: businessName,
       images: ogImage ? [{
         url: ogImage,
-        alt: `${businessName} - ${seoData.title}`,
+        alt: `${businessName} - ${title}`,
       }] : [],
       locale: 'en_US',
       type: 'website',
@@ -90,20 +95,20 @@ export async function generateMetadata(): Promise<Metadata> {
     // Twitter
     twitter: {
       card: 'summary_large_image',
-      title: seoData.title,
-      description: seoData.description,
+      title: title,
+      description: description,
       images: ogImage ? [ogImage] : [],
     },
     
     // Additional metadata
     alternates: {
-      canonical: seoData.canonicalUrl,
+      canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://junksbutlers.com',
     },
     
     // Verification and other meta tags
     other: {
       'theme-color': landingPageData.themeData?.primaryColor,
-      'focused-keywords': seoData.focusedKeywords?.join(', ') || '',
+      'focused-keywords': 'junk removal, trash removal, same-day service, eco-friendly disposal',
     },
   };
 }
@@ -218,10 +223,7 @@ export default async function Home() {
             <GallerySection
               title={landingPageData.content.gallery.title}
               description={landingPageData.content.gallery.description}
-              images={landingPageData.images?.filter(
-                (img) =>
-                  img.category === "gallery" || img.slotName === "gallery"
-              )}
+              images={getGalleryImages(landingPageData.images)}
             />
           )}
 

@@ -15,17 +15,24 @@ import { Metadata } from "next";
 
 // Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+  title: 'Book Glendale AZ Clean Outs & Junk Removal with Junks Butlers',
+  description: 'Professional Glendale AZ clean outs & junk removal by Junks Butlers. Same-day service for residential & commercial clutter, debris, furniture & trash haul-away.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/junk-removal/service-areas/glendale-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+    title: 'Book Glendale AZ Clean Outs & Junk Removal with Junks Butlers',
+    description: 'Professional Glendale AZ clean outs & junk removal by Junks Butlers. Same-day service for residential & commercial clutter, debris, furniture & trash haul-away.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
+    title: 'Book Glendale AZ Clean Outs & Junk Removal with Junks Butlers',
+    description: 'Professional Glendale AZ clean outs & junk removal by Junks Butlers. Same-day service for residential & commercial clutter, debris, furniture & trash haul-away.',
   },
 };
 
@@ -129,10 +136,10 @@ const CTA_DATA = {
   description: "Experience the best with Junk Butlers, the premier and skilled residential or commercial buildings junks or trash removal contractor Glendale AZ. We provide certified and trusted all kinds household removal or cleanouts, delivering professional, affordable, and rapid hauling solutions today!",
   ctaButton: { 
     label: "Get a Free Quote", 
-    href: "#contact" 
+    href: "/contact-us" 
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Phoenix, AZ",
   },
   overlayText: "Our team understands the logistics of Glendale property management, making us the premier choice for both homeowners and business managers alike. When you need a skilled and professional home or offices junks or trash cleanout contractor, you need a team that values your time and maintains a clean workspace from start to finish. From demolition debris to office cubicle disposal, Junk Butlers handles it all. As a residential and commercial old furniture removal contractor, we ensure that your unwanted items are disposed of ethically and efficiently. Don't settle for less when you can hire the highest-rated experts in the Valley. Let us transform your space today with our reliable, high-capacity junk removal and demolition services."

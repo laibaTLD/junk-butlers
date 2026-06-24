@@ -6,6 +6,7 @@ import FooterSection from "@/sections/FooterSection";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import Script from 'next/script';
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -22,8 +23,11 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Junk Butlers - Professional Junk Removal Services",
-  description: "Fast, reliable, and eco-friendly junk removal services. We handle residential, commercial, and construction cleanouts with transparent pricing.",
+  title: "Junks Butlers Professional Junk & Trash Removal Services | Book Fast & Reliable Pickup",
+  description: "Trusted junk and trash removal by Junks Butlers. Same-day service, upfront pricing, and eco-friendly disposal for homes and businesses. Schedule your cleanout now.",
+  verification: {
+    google: 'OVJPxepzejctNO3aq8XobKJZhsDjwvylIo-7AvD7iwM',
+  },
 };
 
 // Fetch shared data for the layout
@@ -44,6 +48,9 @@ async function getLayoutData(): Promise<LandingPageData | null> {
   }
 }
 
+// Google Analytics Measurement ID
+const GA_MEASUREMENT_ID = 'G-DTFWE0LH3W';
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -54,9 +61,23 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${openSans.variable} antialiased min-h-screen flex flex-col`}
+        className={`${poppins.variable} ${openSans.variable} font-sans`}
         suppressHydrationWarning={true}
       >
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+        
         <ThemeProvider theme={layoutData?.themeData}>
           <Navbar 
             businessName={layoutData?.businessName}

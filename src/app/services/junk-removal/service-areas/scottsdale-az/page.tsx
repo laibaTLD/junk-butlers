@@ -15,17 +15,19 @@ import { Metadata } from "next";
 
 // Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
-  openGraph: {
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
-    type: 'website',
+  title: 'Hire Affordable Junk Removal Experts Junks Butlers In Scottsdale AZ',
+  description: 'Need junk gone fast? Junks Butler s Scottsdale offers efficient junk removal experts, hauling, and disposal for homes & businesses with same-day service.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/junk-removal/service-areas/scottsdale-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
+    title: 'Hire Affordable Junk Removal Experts Junks Butlers In Scottsdale AZ',
+    description: 'Need junk gone fast? Junks Butler s Scottsdale offers efficient junk removal experts, hauling, and disposal for homes & businesses with same-day service.',
   },
 };
 
@@ -147,10 +149,10 @@ const CTA_DATA = {
     "Experience the best with Junk Butlers, your premier and skilled residential or commercial junk removal contractor. We provide professional and affordable hauling for homes and offices. Reclaim your space today with Scottsdale’s most trusted and certified trash removal experts.",
   ctaButton: {
     label: "Get a Free Quote",
-    href: "#contact",
+    href: "/contact-us",
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Sun City, AZ",
   },
   overlayText:

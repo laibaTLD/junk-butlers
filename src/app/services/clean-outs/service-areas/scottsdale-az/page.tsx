@@ -16,6 +16,13 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
   description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/clean-outs/service-areas/scottsdale-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
     description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
@@ -146,10 +153,10 @@ const CTA_DATA = {
     "Experience top-tier service with Junk Butlers, Scottsdale’s leader for professional and affordable debris removal. Whether you need skilled furniture disposal or same-day commercial cleanouts, our local and certified team delivers fast, reliable results to keep your property spotless.",
   ctaButton: {
     label: "Get a Free Quote",
-    href: "#contact",
+    href: "/contact-us",
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Sun City, AZ",
   },
   overlayText:

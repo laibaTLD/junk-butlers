@@ -7,8 +7,14 @@ import ServiceAreaIntroSection from "@/sections/ServiceAreaIntroSection";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Areas We Serve for Junk & Trash Removal Services | Junk Butlers",
+  description: "We provide comprehensive junk removal solutions tailored to your needs. Our experienced team handles everything from single-item pickups to full property cleanouts with efficiency and care.",
+};
 
 async function getLandingPageData(): Promise<LandingPageData> {
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
@@ -37,19 +43,17 @@ export default async function ServingAreasPage() {
   const landingPageData = await getLandingPageData();
   const serviceAreas = landingPageData.businessData?.serviceAreas || [];
 
+  // Ensure SEO data includes proper indexing for serving areas page
+  const seoDataWithIndex = {
+    ...landingPageData.seoData,
+    isIndex: true, // Explicitly set to true for serving areas page
+    canonicalUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://junksbutlers.com'}/serving-areas`
+  };
+
   return (
     <Layout
-      title={
-        landingPageData.seoData.title
-          ? `${landingPageData.seoData.title} | Service Areas`
-          : "Service Areas"
-      }
-      description={
-        landingPageData.seoData.description ||
-        "Explore the locations and regions where we provide professional iron work and structural services."
-      }
       theme={landingPageData.themeData}
-      seoData={landingPageData.seoData}
+      seoData={seoDataWithIndex}
       landingPageData={landingPageData}
     >
       <div className="animate-fade-in-up">

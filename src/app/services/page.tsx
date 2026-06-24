@@ -2,8 +2,14 @@ import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: "Explore Our Professional Trash & Junk Removal Services | Junk Butlers | Phoenix AZ",
+  description: "Junk Butlers is your premier partner for a clutter-free life. Explore our comprehensive junk removal services, including Junk Removal, Trash Removal, Clean Outs, and Junk Hauling solutions for all your needs.",
+};
 
 async function getLandingPageData(): Promise<LandingPageData> {
   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;

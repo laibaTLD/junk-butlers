@@ -15,17 +15,24 @@ import { Metadata } from "next";
 
 // Page metadata
 export const metadata: Metadata = {
-  title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-  description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+  title: 'Hire Fast Junk Removal Services In Surprise AZ | Junks Butlers',
+  description: 'Junk Butlers offers a speedy, affordable junk removal company in Surprise AZ. Residential & commercial trash hauling, debris cleanup, and clutter removal.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/junk-removal/service-areas/surprise-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ | Same Day Service',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal. From skilled home debris cleanup to commercial demolition, our local experts handle every haul with precision and care.',
+    title: 'Hire Fast Junk Removal Services In Surprise AZ | Junks Butlers',
+    description: 'Junk Butlers offers a speedy, affordable junk removal company in Surprise AZ. Residential & commercial trash hauling, debris cleanup, and clutter removal.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Certified & Professional #1 Junk Removal Contractor Phoenix AZ',
-    description: 'Clear out the clutter with Junk Butlers. As the #1 certified junk removal contractor in Phoenix, AZ, we provide professional, affordable, and same-day trash removal.',
+    title: 'Hire Fast Junk Removal Services In Surprise AZ | Junks Butlers',
+    description: 'Junk Butlers offers a speedy, affordable junk removal company in Surprise AZ. Residential & commercial trash hauling, debris cleanup, and clutter removal.',
   },
 };
 
@@ -147,10 +154,10 @@ const CTA_DATA = {
     "Clear your space today with Junk Butlers. As the premier junk removal agency in Surprise, AZ, we offer certified and trusted hauling for homes and offices. From furniture disposal to debris removal, our skilled team delivers professional, same-day service.",
   ctaButton: {
     label: "Get a Free Quote",
-    href: "#contact",
+    href: "/contact-us",
   },
   backgroundImage: {
-    src: "/images/image-10.webp",
+    src: "/images/image-4.webp",
     alt: "Junk removal and demolition services in Sun City, AZ",
   },
   overlayText:

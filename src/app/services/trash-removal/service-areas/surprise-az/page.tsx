@@ -12,18 +12,26 @@ import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+// Page metadata
 export const metadata: Metadata = {
-  title: 'Professional Trash Removal Services Surprise AZ | Fast Trash Hauling',
-  description: 'Expert trash removal services in Surprise, AZ. Fast, affordable, and reliable trash hauling for residential and commercial properties in Surprise and surrounding areas.',
+  title: 'Appliance Disposal Contractor in Surprise, AZ – Book Now | Junks Butlers',
+  description: 'Trusted appliance disposal contractor in Surprise, AZ. Junks Butlers are unwanted clutter experts delivering elite junk removal, fast pickup, and eco-friendly disposal.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/trash-removal/service-areas/surprise-az',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Professional Trash Removal Services Surprise AZ | Fast Trash Hauling',
-    description: 'Expert trash removal services in Surprise, AZ. Fast, affordable, and reliable trash hauling for residential and commercial properties in Surprise and surrounding areas.',
+    title: 'Appliance Disposal Contractor in Surprise, AZ – Book Now | Junks Butlers',
+    description: 'Trusted appliance disposal contractor in Surprise, AZ. Junks Butlers are unwanted clutter experts delivering elite junk removal, fast pickup, and eco-friendly disposal.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Professional Trash Removal Services Surprise AZ | Fast Trash Hauling',
-    description: 'Expert trash removal services in Surprise, AZ. Fast, affordable, and reliable trash hauling for residential and commercial properties.',
+    title: 'Appliance Disposal Contractor in Surprise, AZ – Book Now | Junks Butlers',
+    description: 'Trusted appliance disposal contractor in Surprise, AZ. Junks Butlers are unwanted clutter experts delivering elite junk removal, fast pickup, and eco-friendly disposal.',
   },
 };
 

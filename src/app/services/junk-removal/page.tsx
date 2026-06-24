@@ -4,11 +4,19 @@ import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/app/services/[id]/components/Breadcrumbs";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Professional Junk Removal Services | Fast & Reliable Removal Solutions',
   description: 'Expert junk Removal services for homes and businesses. Fast, reliable, and affordable junk Removal with proper disposal and recycling.',
+  alternates: {
+    canonical: 'https://junksbutlers.com/services/junk-removal',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: 'Professional Junk Removal Services | Fast & Reliable Removal Solutions',
     description: 'Expert junk Removal services for homes and businesses. Fast, reliable, and affordable junk Removal with proper disposal and recycling.',
@@ -117,12 +125,12 @@ export default async function JunkRemovalPage() {
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Service Areas</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Peoria, AZ</li>
-                  <li>• Phoenix, AZ</li>
-                  <li>• Glendale, AZ</li>
-                  <li>• Sun City, AZ</li>
-                  <li>• Surprise, AZ</li>
-                  <li>• Scottsdale, AZ</li>
+                  <li>• <Link href="/services/junk-removal/service-areas/peoria-az" className="text-blue-600 hover:text-blue-800 hover:underline">Peoria, AZ</Link></li>
+                  <li>• <Link href="/services/junk-removal/service-areas/phoenix-az" className="text-blue-600 hover:text-blue-800 hover:underline">Phoenix, AZ</Link></li>
+                  <li>• <Link href="/services/junk-removal/service-areas/glendale-az" className="text-blue-600 hover:text-blue-800 hover:underline">Glendale, AZ</Link></li>
+                  <li>• <Link href="/services/junk-removal/service-areas/sun-city-az" className="text-blue-600 hover:text-blue-800 hover:underline">Sun City, AZ</Link></li>
+                  <li>• <Link href="/services/junk-removal/service-areas/surprise-az" className="text-blue-600 hover:text-blue-800 hover:underline">Surprise, AZ</Link></li>
+                  <li>• <Link href="/services/junk-removal/service-areas/scottsdale-az" className="text-blue-600 hover:text-blue-800 hover:underline">Scottsdale, AZ</Link></li>
                 </ul>
               </div>
             </div>

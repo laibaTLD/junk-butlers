@@ -8,13 +8,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/services",
     "/serving-areas",
+    "/contact-us",
+    "/about-us",
   ];
 
   const serviceIds = [
     "junk-removal",
     "junk-hauling",
     "clean-outs",
-    "trash-removal",
+    "trash-removal"
   ];
 
   const cities = [
@@ -23,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "phoenix-az",
     "scottsdale-az",
     "sun-city-az",
-    "surprise-az",
+    "surprise-az"
   ];
 
   const urls: MetadataRoute.Sitemap = [];
@@ -48,17 +50,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Service area pages per service and city
-  for (const service of serviceIds) {
-    for (const city of cities) {
+  // Service pages for each city
+  for (const city of cities) {
+    for (const service of serviceIds) {
       urls.push({
         url: `${baseUrl}/services/${service}/service-areas/${city}`,
         lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.7,
+        changeFrequency: "monthly",
+        priority: 0.8,
       });
     }
   }
+
 
   return urls;
 }
