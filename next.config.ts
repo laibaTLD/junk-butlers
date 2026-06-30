@@ -33,12 +33,19 @@ const nextConfig = {
       "peoria-az",
     ];
 
-    return services.flatMap((service) =>
+    const serviceRewrites = services.map((service) => ({
+      source: `/${service}`,
+      destination: `/services/${service}`,
+    }));
+
+    const areaRewrites = services.flatMap((service) =>
       cities.map((city) => ({
         source: `/${service}-in-${city}`,
         destination: `/services/${service}/service-areas/${city}`,
       }))
     );
+
+    return [...serviceRewrites, ...areaRewrites];
   },
   // Enable compression and optimization
   compress: true,

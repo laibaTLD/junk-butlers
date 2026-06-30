@@ -51,19 +51,19 @@ export default async function ServicesIndexPage() {
   const junkHauling = matchServiceByTitle("Junk Hauling") ?? services[3];
 
   const items = [
-    { href: "/services/junk-removal", label: "Junk Removal", service: junkRemoval },
+    { href: "/junk-removal", label: "Junk Removal", service: junkRemoval },
     {
-      href: "/services/trash-removal",
+      href: "/trash-removal",
       label: "Trash Removal",
       service: trashRemoval,
     },
     {
-      href: "/services/clean-outs",
+      href: "/clean-outs",
       label: "Clean Outs",
       service: cleanOuts,
     },
     {
-      href: "/services/junk-hauling",
+      href: "/junk-hauling",
       label: "Junk Hauling",
       service: junkHauling,
     },

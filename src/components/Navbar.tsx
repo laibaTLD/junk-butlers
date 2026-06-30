@@ -22,7 +22,9 @@ interface NavbarProps {
 }
 
 function getServiceAreaUrl(serviceHref: string, areaLabel: string): string {
-  const serviceSlug = serviceHref.replace("/services/", "");
+  const serviceSlug = serviceHref
+    .replace(/^\/services\//, "")
+    .replace(/^\//, "");
   const areaSlug = areaLabel
     .toLowerCase()
     .replace(/,/g, "")
@@ -96,22 +98,22 @@ export default function Navbar({
   const servingAreaGroups = [
     {
       label: "Junk Removal",
-      href: "/services/junk-removal",
+      href: "/junk-removal",
       areas: areaLabels,
     },
     {
       label: "Trash Removal",
-      href: "/services/trash-removal",
+      href: "/trash-removal",
       areas: areaLabels,
     },
     {
       label: "Clean Outs",
-      href: "/services/clean-outs",
+      href: "/clean-outs",
       areas: areaLabels,
     },
     {
       label: "Junk Hauling",
-      href: "/services/junk-hauling",
+      href: "/junk-hauling",
       areas: areaLabels,
     },
   ];
