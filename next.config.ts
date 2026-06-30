@@ -18,7 +18,27 @@ const nextConfig = {
   },
   // Configure for optimal SSG + ISR
   async rewrites() {
-    return [];
+    const services = [
+      "junk-removal",
+      "junk-hauling",
+      "clean-outs",
+      "trash-removal",
+    ];
+    const cities = [
+      "glendale-az",
+      "sun-city-az",
+      "phoenix-az",
+      "scottsdale-az",
+      "surprise-az",
+      "peoria-az",
+    ];
+
+    return services.flatMap((service) =>
+      cities.map((city) => ({
+        source: `/${service}-in-${city}`,
+        destination: `/services/${service}/service-areas/${city}`,
+      }))
+    );
   },
   // Enable compression and optimization
   compress: true,

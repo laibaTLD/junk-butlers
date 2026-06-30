@@ -21,6 +21,16 @@ interface NavbarProps {
   serviceAreas?: ServiceArea[];
 }
 
+function getServiceAreaUrl(serviceHref: string, areaLabel: string): string {
+  const serviceSlug = serviceHref.replace("/services/", "");
+  const areaSlug = areaLabel
+    .toLowerCase()
+    .replace(/,/g, "")
+    .replace(/\s+/g, "-");
+
+  return `/${serviceSlug}-in-${areaSlug}`;
+}
+
 export default function Navbar({
   businessName,
   logoImage,
@@ -181,15 +191,11 @@ export default function Navbar({
                   <div className="py-2 lg:w-64 bg-white max-h-64 overflow-y-auto">
                     {servingAreaGroups[activeServiceIndex]?.areas.map((area, index) => {
                       const group = servingAreaGroups[activeServiceIndex];
-                      const areaSlug = area
-                        .toLowerCase()
-                        .replace(/,/g, "")
-                        .replace(/\s+/g, "-");
 
                       return (
                         <Link
                           key={`${area}-${index}`}
-                          href={`${group.href}/service-areas/${areaSlug}`}
+                          href={getServiceAreaUrl(group.href, area)}
                           className="block px-4 py-2 text-sm hover:bg-gray-100 transition-colors"
                         >
                           {area}
@@ -367,11 +373,10 @@ export default function Navbar({
                       </h3>
                       <div className="grid grid-cols-2 gap-2">
                         {group.areas.map((area) => {
-                          const areaSlug = area.toLowerCase().replace(/,/g, "").replace(/\s+/g, "-");
                           return (
                             <Link
                               key={`${area}-${group.href}`}
-                              href={`${group.href}/service-areas/${areaSlug}`}
+                              href={getServiceAreaUrl(group.href, area)}
                               onClick={() => {
                                 setIsOpen(false);
                                 setShowAreasModal(false);
