@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "junk-removal",
     "junk-hauling",
     "clean-outs",
-    "trash-removal"
+    "trash-removal",
   ];
 
   const cities = [
@@ -25,12 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "phoenix-az",
     "scottsdale-az",
     "sun-city-az",
-    "surprise-az"
+    "surprise-az",
   ];
 
   const urls: MetadataRoute.Sitemap = [];
 
-  // Static top-level pages
   for (const path of staticPaths) {
     urls.push({
       url: `${baseUrl}${path}`,
@@ -40,28 +39,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Service root pages
   for (const service of serviceIds) {
     urls.push({
-      url: `${baseUrl}/services/${service}`,
+      url: `${baseUrl}/${service}`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
     });
   }
 
-  // Service pages for each city
-  for (const city of cities) {
-    for (const service of serviceIds) {
+  for (const service of serviceIds) {
+    for (const city of cities) {
       urls.push({
-        url: `${baseUrl}/services/${service}/service-areas/${city}`,
+        url: `${baseUrl}/${service}-in-${city}`,
         lastModified: now,
         changeFrequency: "monthly",
         priority: 0.8,
       });
     }
   }
-
 
   return urls;
 }
